@@ -9,6 +9,7 @@
       <itemPath>timer.h</itemPath>
       <itemPath>Robot.h</itemPath>
       <itemPath>Toolbox.h</itemPath>
+      <itemPath>PWM.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -23,6 +24,7 @@
       <itemPath>timer.c</itemPath>
       <itemPath>Robot.c</itemPath>
       <itemPath>Toolbox.c</itemPath>
+      <itemPath>PWM.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -35,7 +37,7 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>dsPIC33EP512GM306</targetDevice>
+        <targetDevice>dsPIC33EP512GM706</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
@@ -228,7 +230,7 @@
         <property key="OUTPUT COMPARE 8" value="true"/>
         <property key="PARALLEL MASTER/SLAVE PORT" value="true"/>
         <property key="PTG" value="true"/>
-        <property key="PWM" value="true"/>
+        <property key="PWM" value="false"/>
         <property key="REAL TIME CLOCK AND CALENDAR" value="true"/>
         <property key="SPI 1" value="true"/>
         <property key="SPI 2" value="true"/>
@@ -251,7 +253,6 @@
         <property key="UART 3" value="true"/>
         <property key="UART 4" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="false"/>

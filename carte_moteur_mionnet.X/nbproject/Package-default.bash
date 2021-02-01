@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/carte_moteur_leclerc.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=carte_moteur_leclerc.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=cartemoteurleclerc.x/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/carte_moteur_mionnet.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=carte_moteur_mionnet.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=cartemoteurmionnet.x/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/cartemoteurleclerc.x/bin
+makeDirectory ${TMPDIR}/cartemoteurmionnet.x/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/cartemoteurleclerc.x.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/cartemoteurmionnet.x.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/cartemoteurleclerc.x.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/cartemoteurmionnet.x.tar *
 checkReturnCode
 
 # Cleanup

@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=carte_moteur_leclerc.X
+PROJECTNAME=carte_moteur_mionnet.X
 
 # Active Configuration
 DEFAULTCONF=default

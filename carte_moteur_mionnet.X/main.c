@@ -4,12 +4,15 @@
 #include "ChipConfig.h"
 #include "IO.h"
 #include "timer.h"
+#include "PWM.h"
 
 int main (void){
 InitOscillator();
 InitIO();
 InitTimer23();
 InitTimer1();
+InitPWM();
+PWMSetSpeed(25);
 
 LED_BLANCHE = 1;
 LED_BLEUE = 1;

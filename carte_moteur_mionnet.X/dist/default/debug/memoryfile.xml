@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/default/debug/carte_moteur_leclerc.X.debug.elf">
+  <executable name="dist/default/debug/carte_moteur_mionnet.X.debug.elf">
     <memory name="data">
       <units>bytes</units>
       <length>49152</length>
-      <used>98</used>
-      <free>49054</free>
+      <used>100</used>
+      <free>49052</free>
     </memory>
     <memory name="program">
       <units>bytes</units>
       <length>524514</length>
-      <used>2343</used>
-      <free>522171</free>
+      <used>2598</used>
+      <free>521916</free>
     </memory>
   </executable>
 </project>
