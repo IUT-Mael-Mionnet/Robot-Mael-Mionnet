@@ -12,7 +12,8 @@ InitIO();
 InitTimer23();
 InitTimer1();
 InitPWM();
-PWMSetSpeed(25);
+PWMSetSpeed(-25, MOTEUR_DROIT);
+PWMSetSpeed(-25, MOTEUR_GAUCHE);
 
 LED_BLANCHE = 1;
 LED_BLEUE = 1;
