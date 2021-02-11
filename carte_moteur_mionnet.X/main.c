@@ -20,8 +20,14 @@ LED_BLANCHE = 1;
 LED_BLEUE = 1;
 LED_ORANGE = 1;
 
+unsigned int * resultat;
+
 while(1){
-    //LED_BLANCHE = !LED_BLANCHE;
+    if (ADCIsConversionFinished() == 1)
+    {
+        ADCClearConversionFinishedFlag();
+        resultat = ADCGetResult();
+    }
 } // fin main
 }
 
