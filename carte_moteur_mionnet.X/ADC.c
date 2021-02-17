@@ -81,20 +81,20 @@ ADCConversionFinishedFlag = 1;
 
 void ADC1StartConversionSequence()
 {
-AD1CON1bits.SAMP = 1 ; //Lance une acquisition ADC
+    AD1CON1bits.SAMP = 1 ; //Lance une acquisition ADC
 }
 
 unsigned int * ADCGetResult(void)
 {
-return ADCResult;
+    return ADCResult;
 }
 
 unsigned char ADCIsConversionFinished(void)
 {
-return ADCConversionFinishedFlag;
+    return ADCConversionFinishedFlag;
 }
 
 void ADCClearConversionFinishedFlag(void)
 {
-ADCConversionFinishedFlag = 0;
+    ADCConversionFinishedFlag = 0;
 }

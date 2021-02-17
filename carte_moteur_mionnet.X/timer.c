@@ -50,7 +50,6 @@ void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void)
 void InitTimer1(void) {
     //Timer1 pour horodater les mesures (1ms)
     T1CONbits.TON = 0; // Disable Timer
-    T1CONbits.TCKPS = 0b11; //Prescaler
     //11 = 1:256 prescale value
     //10 = 1:64 prescale value
     //01 = 1:8 prescale value
@@ -98,14 +97,12 @@ void SetFreqTimer1(float freq)
 }
 
 void InitTimer4 (void){
+    SetFreqTimer1(1000);
     T4CONbits.TON = 0;
-    T4CONbits.TCKPS = 0b11;
     T4CONbits.TCS = 0;
-    
     IFS1bits.T4IF = 0;
     IEC1bits.T4IE = 1;
-    
-    SetFreqTimer4(1000);
+    T4CONbits.TON = 1;
 }
 
 void SetFreqTimer4(float freq)
@@ -123,13 +120,19 @@ void SetFreqTimer4(float freq)
                     PR4 = (int)(FCY / freq / 256);
                 }
                 else
+                {
                     PR4 = (int)(FCY / freq / 64);
+                }
         }
         else
-        PR4 = (int)(FCY / freq / 8);
+        {
+            PR4 = (int)(FCY / freq / 8);
+        }
     }
     else
+    {
         PR4 = (int)(FCY / freq);
+    }
 }
 
 void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {

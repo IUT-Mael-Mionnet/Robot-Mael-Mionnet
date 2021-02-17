@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/default/debug/carte_moteur_mionnet.X.debug.elf">
+  <executable name="dist/default/production/carte_moteur_mionnet.X.production.elf">
     <memory name="data">
       <units>bytes</units>
       <length>49152</length>
-      <used>132</used>
-      <free>49020</free>
+      <used>52</used>
+      <free>49100</free>
     </memory>
     <memory name="program">
       <units>bytes</units>
