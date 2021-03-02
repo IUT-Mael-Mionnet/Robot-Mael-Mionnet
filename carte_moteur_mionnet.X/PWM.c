@@ -76,11 +76,11 @@ void PWMUpdateSpeed()
 {
     // Cette fonction est appelée sur timer et permet de suivre des rampes d?accélération
     if (robotState.vitesseDroiteCommandeCourante < robotState.vitesseDroiteConsigne)
-    // Si la vitesse actuelle < à la vitesse demandé alors la vitesse actuelle = la vitesse actuelle + accélération. S'il est supérieur alors il prend la vitesse demandé. 
+    // Si la vitesse actuelle < à la vitesse consigne alors la vitesse actuelle = la vitesse actuelle + accélération. La vitesse est bloqué à la valeur consigne dans le cas ou la somme est supérieur. 
         robotState.vitesseDroiteCommandeCourante = Min(robotState.vitesseDroiteCommandeCourante + acceleration, robotState.vitesseDroiteConsigne);
     
     if (robotState.vitesseDroiteCommandeCourante > robotState.vitesseDroiteConsigne)
-    // Si la vitesse actuelle > à la vitesse demandé alors la vitesse actuelle = la vitesse actuelle - accélération . S'il est inférieur alors il prend la vitesse demandé.   
+    // Si la vitesse actuelle > à la vitesse demandé alors la vitesse actuelle = la vitesse actuelle - accélération. La vitesse est bloqué à la valeur consigne dans le cas ou la somme est inférieur.
         robotState.vitesseDroiteCommandeCourante = Max(robotState.vitesseDroiteCommandeCourante - acceleration, robotState.vitesseDroiteConsigne);
 
     if (robotState.vitesseDroiteCommandeCourante > 0)
