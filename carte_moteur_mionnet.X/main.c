@@ -38,7 +38,7 @@ while(1){
         robotState.distanceTelemetreExtremeDroit = 34 / volts - 5 ;
     }
     
-    if (robotState.distanceTelemetreExtremeDroit < 30) // Si obstacle < 30 cm alors LED orange allumé
+    if (robotState.distanceTelemetreDroit < 30) // Si obstacle < 30 cm alors LED orange allumé
         LED_ORANGE = 1;
 
     else 
@@ -50,7 +50,7 @@ while(1){
     else 
         LED_BLEUE = 0;      //Sinon LED éteinte
 
-    if (robotState.distanceTelemetreExtremeGauche < 30)    // Si obstacle < 30 cm alors LED blanche allumé
+    if (robotState.distanceTelemetreGauche < 30)    // Si obstacle < 30 cm alors LED blanche allumé
         LED_BLANCHE = 1;
     
     else 
