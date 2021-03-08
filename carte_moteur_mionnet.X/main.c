@@ -195,7 +195,7 @@ void SetNextRobotStateInAutomaticMode()
     else if (robotState.distanceTelemetreDroit > 20 && robotState.distanceTelemetreCentre > 30 && robotState.distanceTelemetreGauche > 20 && robotState.distanceTelemetreExtremeDroit < 10 && robotState.distanceTelemetreExtremeGauche < 10)
         positionObstacle = OBSTACLE_EXT_GAUCHE_ET_EXT_DROITE;
     
-    else if (robotState.distanceTelemetreDroit < 10 && robotState.distanceTelemetreCentre > 30 && robotState.distanceTelemetreGauche < 10 && robotState.distanceTelemetreExtremeDroit < 10 && robotState.distanceTelemetreExtremeGauche < 10)
+    else if (robotState.distanceTelemetreDroit < 10 && robotState.distanceTelemetreCentre > 30 && robotState.distanceTelemetreGauche < 10)
         positionObstacle = OBSTACLE_GAUCHE_ET_DROITE;
     
 //    else if (robotState.distanceTelemetreDroit < 30 && robotState.distanceTelemetreCentre > 30 && robotState.distanceTelemetreGauche < 30)
@@ -207,10 +207,10 @@ void SetNextRobotStateInAutomaticMode()
 //    else if (robotState.distanceTelemetreDroit > 30 && robotState.distanceTelemetreCentre < 30 && robotState.distanceTelemetreGauche < 30 && robotState.distanceTelemetreCentre > 20 && robotState.distanceTelemetreGauche > 20)
 //        positionObstacle = OBSTACLE_A_GAUCHE_ET_DEVANT;
     
-    else if ( robotState.distanceTelemetreDroit < 25 && robotState.distanceTelemetreCentre > 30 && robotState.distanceTelemetreGauche > 30) //Obstacle à droite
+    else if ( robotState.distanceTelemetreDroit < 30 && robotState.distanceTelemetreCentre > 30 && robotState.distanceTelemetreGauche > 30) //Obstacle à droite
         positionObstacle = OBSTACLE_A_DROITE;
     
-    else if(robotState.distanceTelemetreDroit > 30 && robotState.distanceTelemetreCentre > 30 && robotState.distanceTelemetreGauche < 25) //Obstacle à gauche
+    else if(robotState.distanceTelemetreDroit > 30 && robotState.distanceTelemetreCentre > 30 && robotState.distanceTelemetreGauche < 30) //Obstacle à gauche
         positionObstacle = OBSTACLE_A_GAUCHE;
     
     else if(robotState.distanceTelemetreCentre < 20) //Obstacle en face donc demi-tour
