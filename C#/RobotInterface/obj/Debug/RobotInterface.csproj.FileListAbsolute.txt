@@ -12,3 +12,6 @@ C:\GitHub\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterface.Properti
 C:\GitHub\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterface.csproj.GenerateResource.cache
 C:\GitHub\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterface.exe
 C:\GitHub\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterface.pdb
+C:\GitHub\Robot-Mael-Mionnet\C#\RobotInterface\bin\Debug\ExtendedSerialPort.dll
+C:\GitHub\Robot-Mael-Mionnet\C#\RobotInterface\bin\Debug\ExtendedSerialPort.pdb
+C:\GitHub\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterface.csproj.CopyComplete
