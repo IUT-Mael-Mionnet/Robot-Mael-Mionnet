@@ -22,14 +22,14 @@ namespace RobotInterface
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
 
-   
-
     public partial class MainWindow : Window
     {
         ReliableSerialPort serialPort1;
         AsyncCallback SerialPort1_DataReceived;
         DispatcherTimer timerAffichage;
 
+        Robot robot = new Robot();
+        
         public MainWindow()
         {
             InitializeComponent();            
@@ -41,13 +41,13 @@ namespace RobotInterface
             timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timerAffichage.Tick += TimerAffichage_Tick;
             timerAffichage.Start();
+            
+            robot.receivedText = "";
         }
-
-        string receivedText = "";
 
         private void SerialPort1_DataReceived1(object sender, DataReceivedArgs e)
         {
-            receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
         }
 
         int a = 0;
@@ -83,10 +83,10 @@ namespace RobotInterface
         
         private void TimerAffichage_Tick(object sender, EventArgs e)
         {
-            if (receivedText != "")
+            if (robot.receivedText != "")
             {
-                textBoxReception.Text = textBoxReception.Text + "Reçu : " + receivedText;
-                receivedText = "";
+                textBoxReception.Text = textBoxReception.Text + "Reçu : " + robot.receivedText;
+                robot.receivedText = "";
             }
         }
 
