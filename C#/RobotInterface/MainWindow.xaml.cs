@@ -48,6 +48,10 @@ namespace RobotInterface
         private void SerialPort1_DataReceived1(object sender, DataReceivedArgs e)
         {
             robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            for (int j = 0; j < e.Data.Length; j++)
+            {
+                robot.byteListReceived.Enqueue(e.Data[j]);
+            }
         }
 
         int a = 0;
@@ -88,11 +92,30 @@ namespace RobotInterface
                 textBoxReception.Text = textBoxReception.Text + "Reçu : " + robot.receivedText;
                 robot.receivedText = "";
             }
+            while (robot.byteListReceived.Count != 0)
+            {
+                byte byteReceived = robot.byteListReceived.Dequeue();
+                string blabla;
+                blabla = "0X" + byteReceived.ToString("X2") + "\n";
+                textBoxReception.Text += blabla;
+            }
+            
+
         }
 
         private void boutonClear_Click(object sender, RoutedEventArgs e)
         {
             textBoxReception.Text = "";
+        }
+
+        private void boutonTest_Click(object sender, RoutedEventArgs e)
+        {
+            byte [] byteList = new byte [20];
+            for (int i = 0; i < 20; i++)
+            {
+                byteList[i] = (byte)(2 * i);
+            }
+            serialPort1.Write(byteList, 0, byteList.Length);
         }
     }
 }
