@@ -28,5 +28,6 @@
             <TextBox x:Name="textBoxReception" Background="{x:Null}" BorderBrush="{x:Null}" AcceptsReturn="True" IsReadOnly="True" />
         </GroupBox>
         <Button Content="Envoyer" x:Name="buttonEnvoyer"  Grid.Column="1"  Grid.Row="3" Width="100" HorizontalAlignment="Center" Background="#FF21EA0C" Click="buttonEnvoyer_Click" />
+        <Button Content="Nettoyer" x:Name="boutonClear"  Grid.Column="3"  Grid.Row="3" Width="100" HorizontalAlignment="Center" Background="#FFEA0C0C" Click="boutonClear_Click" />
     </Grid>
 </Window>
