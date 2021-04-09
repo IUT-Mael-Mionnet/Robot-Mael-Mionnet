@@ -19,7 +19,7 @@ void InitUART(void) {
 
     U1STAbits.URXISEL = 0; // Interrupt after one RX character is received;
     IFS0bits.U1RXIF = 0; // clear RX interrupt flag
-    IEC0bits.U1RXIE = 0; // Disable UART Rx interrupt
+    IEC0bits.U1RXIE = 1; // Enable UART Rx interrupt
 
     U1MODEbits.UARTEN = 1; // Enable UART
     U1STAbits.UTXEN = 1; // Enable UART Tx
@@ -31,6 +31,23 @@ void SendMessageDirect( unsigned char * message, int length)
     for (i = 0; i < length; i++)
     {
         while (U1STAbits.UTXBF); // wait while Tx buffer full
-        U1TXREG = * (message) ++;//Transmit one character
+        U1TXREG = *(message) ++;//Transmit one character
+    }
+}
+
+//Interruption en mode loopback
+void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
+    IFS0bits.U1RXIF = 0; // clear RX interrupt flag
+    /* check for receive errors */
+    if (U1STAbits.FERR == 1) {
+        U1STAbits.FERR = 0;
+    }
+    /* must clear the overrun error to keep uart receiving */
+    if (U1STAbits.OERR == 1) {
+        U1STAbits.OERR = 0;
+    }
+    /* get the data */
+    while (U1STAbits.URXDA == 1) {
+        U1TXREG = U1RXREG;
     }
 }
