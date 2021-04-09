@@ -96,7 +96,7 @@ namespace RobotInterface
             {
                 byte byteReceived = robot.byteListReceived.Dequeue();
                 string blabla;
-                blabla = "0X" + byteReceived.ToString("X2") + "\n";
+                blabla = "0x" + byteReceived.ToString("X2") + "\n";
                 textBoxReception.Text += blabla;
             }
             

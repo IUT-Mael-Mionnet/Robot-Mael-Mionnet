@@ -8,6 +8,7 @@
 #include "ADC.h"
 #include "Robot.h"
 #include "main.h"
+#include "UART.h"
 
 int main (void){
 InitOscillator();
@@ -17,6 +18,9 @@ InitTimer1();
 InitPWM();
 InitADC1();
 InitTimer4();
+InitUART();
+
+
 while(1){
     unsigned int * result = ADCGetResult();
     if (ADCIsConversionFinished() == 1)     //Conversion des données en distance (cm)
@@ -55,7 +59,9 @@ while(1){
     
     else 
         LED_BLANCHE = 0;        //Sinon LED éteinte
-   
+    
+    //SendMessageDirect((unsigned char *) "Bonjour", 7);
+    //__delay32(40000000);
 } // fin main
 }
 
