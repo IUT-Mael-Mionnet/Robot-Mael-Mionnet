@@ -97,7 +97,7 @@ void SetFreqTimer1(float freq)
 }
 
 void InitTimer4 (void){
-    SetFreqTimer1(1000);
+    SetFreqTimer4(1000);
     T4CONbits.TON = 0;
     T4CONbits.TCS = 0;
     IFS1bits.T4IF = 0;

@@ -22,10 +22,10 @@
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <GroupBox x:Name ="groupBox" Header ="Emission" Background="#FFABABAC" BorderBrush="#FF000000" Grid.Column="1" Grid.Row="1" Margin="0" Grid.ColumnSpan="2">
-            <TextBox x:Name="textBoxEmission" Background="{x:Null}" BorderBrush="{x:Null}" AcceptsReturn="True" KeyUp="textBoxEmission_KeyUp"  />
+            <TextBox x:Name="textBoxEmission" Background="{x:Null}" BorderBrush="{x:Null}" KeyUp="textBoxEmission_KeyUp"  />
         </GroupBox>
         <GroupBox x:Name ="groupBox1"  Header="Réception" Background="#FF939393" BorderBrush=" #FF000000" Grid.Column="3" Grid.Row="1" >
-            <TextBox x:Name="textBoxReception" Background="{x:Null}" BorderBrush="{x:Null}" AcceptsReturn="True" IsReadOnly="True" />
+            <TextBox x:Name="textBoxReception" Background="{x:Null}" BorderBrush="{x:Null}" IsReadOnly="True" TextWrapping="Wrap" />
         </GroupBox>
         <Button Content="Envoyer" x:Name="buttonEnvoyer"  Grid.Column="1"  Grid.Row="3" Width="100" HorizontalAlignment="Center" Background="#FF21EA0C" Click="buttonEnvoyer_Click" />
         <Button Content="Nettoyer" x:Name="boutonClear"  Grid.Column="3"  Grid.Row="3" Width="100" HorizontalAlignment="Center" Background="#FFEA0C0C" Click="boutonClear_Click" />
