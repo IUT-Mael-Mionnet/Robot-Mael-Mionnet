@@ -100,7 +100,7 @@ namespace RobotInterface
                 textBoxReception.Text += blabla;
             }
             
-
+        
         }
 
         private void boutonClear_Click(object sender, RoutedEventArgs e)
