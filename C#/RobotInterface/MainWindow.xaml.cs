@@ -54,6 +54,30 @@ namespace RobotInterface
             }
         }
 
+        byte CalculateChecksum (int msgFunction,int msgPayloadLength,byte[] msgPayload) 
+        {
+            int a;
+            a=0xFE^0x00^msgPayloadLength^msgPayload;
+            // soit a est la valeur qui fait le ou exclusif de SOF,COMMAND,PAYLOADLENGTH et PAYLOAD
+            return a;
+            //on retourne a la valeur de l'octet Checksum.
+        }
+
+        void UartEncodeAndSendMessage (int msgFunction,int msgPayloadLength,byte[] msgPayload)
+        {
+            // Ici on envoi un message qui comprend SOF, Command, PayloadLength, Payload et CheckSum.
+            int b;
+            b = CalculateChecksum(msgFunction,msgPayloadLength,msgPayload);
+           
+            SerialPort1.writeLine(0xFE); 
+            SerialPort1.writeLine(0x00); 
+            SerialPort1.writeLine(msgPayloadLength); 
+            SerialPort1.writeLine(msgPayload); 
+            SerialPort1.writeLine(a); 
+        }
+
+
+
         int a = 0;
         void SendMessage()
         {
