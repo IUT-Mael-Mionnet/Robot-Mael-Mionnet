@@ -54,29 +54,28 @@ namespace RobotInterface
             }
         }
 
-        byte CalculateChecksum (int msgFunction,int msgPayloadLength,byte[] msgPayload) 
+        byte CalculateChecksum (int msgFunction, int msgPayloadLength, byte[] msgPayload) 
         {
-            int a;
-            a=0xFE^0x00^msgPayloadLength^msgPayload;
+            int checksum;
+            checksum = 0xFE ^ msgFunction ^ msgPayloadLength ^ msgPayload;
             // soit a est la valeur qui fait le ou exclusif de SOF,COMMAND,PAYLOADLENGTH et PAYLOAD
-            return a;
+            return checksum;
             //on retourne a la valeur de l'octet Checksum.
         }
 
         void UartEncodeAndSendMessage (int msgFunction,int msgPayloadLength,byte[] msgPayload)
         {
             // Ici on envoi un message qui comprend SOF, Command, PayloadLength, Payload et CheckSum.
-            int b;
-            b = CalculateChecksum(msgFunction,msgPayloadLength,msgPayload);
+            int checksum;
+            checksum = CalculateChecksum(msgFunction,msgPayloadLength,msgPayload);
            
-            SerialPort1.writeLine(0xFE); 
-            SerialPort1.writeLine(0x00); 
-            SerialPort1.writeLine(msgPayloadLength); 
-            SerialPort1.writeLine(msgPayload); 
-            SerialPort1.writeLine(a); 
+            SerialPort1.WriteLine(0xFE); 
+            SerialPort1.WriteLine(msgFunction); 
+            SerialPort1.WriteLine(msgPayloadLength); 
+            SerialPort1.WriteLine(msgPayload); 
+            SerialPort1.WriteLine(checksum); 
+            //fin Q2 du 3.1.1
         }
-
-
 
         int a = 0;
         void SendMessage()
@@ -133,12 +132,22 @@ namespace RobotInterface
 
         private void boutonTest_Click(object sender, RoutedEventArgs e)
         {
-            byte [] byteList = new byte [20];
-            for (int i = 0; i < 20; i++)
-            {
-                byteList[i] = (byte)(2 * i);
-            }
-            serialPort1.Write(byteList, 0, byteList.Length);
+            //byte [] byteList = new byte [20];
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    byteList[i] = (byte)(2 * i);
+            //}
+            //serialPort1.Write(byteList, 0, byteList.Length);
+
+            int msgFunction, msgPayloadLength;
+            byte[] msgPayload;
+
+            msgFunction = 0x0080;
+            msgPayload = textBoxEmission.Text;
+            msgPayloadLength = msgPayload.length;
+            UartEncodeAndSendMessage (msgFunction, msgPayloadLength, msgPayload);
+            textBoxEmission.Text="";
+
         }
     }
 }
