@@ -139,8 +139,7 @@ namespace RobotInterface
             //}
             //serialPort1.Write(byteList, 0, byteList.Length);
 
-            int msgFunction, msgPayloadLength;
-            byte[] msgPayload;
+            int msgFunction, msgPayloadLength,msgPayload;
 
             msgFunction = 0x0080;
             msgPayload = textBoxEmission.Text;
