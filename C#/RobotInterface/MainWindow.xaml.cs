@@ -56,28 +56,44 @@ namespace RobotInterface
 
         byte CalculateChecksum (int msgFunction, int msgPayloadLength, byte[] msgPayload) 
         {
-            int checksum;
-            checksum = 0xFE ^ msgFunction ^ msgPayloadLength ^ msgPayload;
+            byte checksum;
+            checksum = 0xFE;
+            checksum ^= (byte)(msgFunction >> 8);
+            checksum ^= (byte)(msgFunction >> 0);
+            checksum ^= (byte)(msgPayloadLength >> 8);
+            checksum ^= (byte)(msgPayloadLength >> 0);
+            for(int i = 0; i < msgPayloadLength; i++)
+            {
+                checksum ^= (byte)(msgPayload [i]);
+            }
             // soit a est la valeur qui fait le ou exclusif de SOF,COMMAND,PAYLOADLENGTH et PAYLOAD
             return checksum;
-            //on retourne a la valeur de l'octet Checksum.
+            //on retourne la valeur de l'octet Checksum.
         }
 
-        void UartEncodeAndSendMessage (int msgFunction,int msgPayloadLength,byte[] msgPayload)
+        void UartEncodeAndSendMessage (int msgFunction, int msgPayloadLength, byte[] msgPayload)
         {
             // Ici on envoi un message qui comprend SOF, Command, PayloadLength, Payload et CheckSum.
-            int checksum;
-            checksum = CalculateChecksum(msgFunction,msgPayloadLength,msgPayload);
-           
-            SerialPort1.WriteLine(0xFE); 
-            SerialPort1.WriteLine(msgFunction); 
-            SerialPort1.WriteLine(msgPayloadLength); 
-            SerialPort1.WriteLine(msgPayload); 
-            SerialPort1.WriteLine(checksum); 
-            //fin Q2 du 3.1.1
+            byte checksum = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
+            byte[] msg = new byte[6 + msgPayloadLength];
+            int pos = 0;
+            msg[pos++] = 0xFE;
+            msg[pos++] = (byte)(msgFunction >> 8);
+            msg[pos++] = (byte)(msgFunction >> 0);
+            msg[pos++] = (byte)(msgPayloadLength >> 8);
+            msg[pos++] = (byte)(msgPayloadLength >> 0);
+            for(int i = 0; i < msgPayloadLength; i++)
+            {
+                msg[pos++] = msgPayload[i];
+            }
+            msg[pos++] = checksum;
+            serialPort1.Write(msg, 0, msg.Length);
         }
 
         int a = 0;
+
+        public object SerialPort1 { get; private set; }
+
         void SendMessage()
         {
             serialPort1.WriteLine(textBoxEmission.Text);
@@ -139,14 +155,12 @@ namespace RobotInterface
             //}
             //serialPort1.Write(byteList, 0, byteList.Length);
 
-            int msgFunction, msgPayloadLength,msgPayload;
-
+            int msgFunction, msgPayloadLength;
             msgFunction = 0x0080;
-            msgPayload = textBoxEmission.Text;
-            msgPayloadLength = msgPayload.length;
+            byte[] msgPayload = Encoding.ASCII.GetBytes(textBoxEmission.Text);
+            msgPayloadLength = msgPayload.Length;
             UartEncodeAndSendMessage (msgFunction, msgPayloadLength, msgPayload);
-            textBoxEmission.Text="";
-
+            textBoxEmission.Text = "";
         }
     }
 }
