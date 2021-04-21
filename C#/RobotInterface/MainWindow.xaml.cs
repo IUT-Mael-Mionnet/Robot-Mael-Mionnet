@@ -214,6 +214,7 @@ namespace RobotInterface
                     msgDecodedPayloadLength = c;
                     msgDecodedPayloadLength = (msgDecodedPayloadLength << 8);
                     rcvState = StateReception.PayloadLengthLSB;
+                    //si plus grand que la capacité du buffer alors non prise en compte du message 
                     break;
 
                 case StateReception.PayloadLengthLSB:
@@ -235,9 +236,10 @@ namespace RobotInterface
                     byte receivedChecksum = c;
                     if (calculatedChecksum == receivedChecksum)
                         {
-                                            //Success, on a un message valide
+                            //success, on a un message valide
+
                         }
-                    //…
+                    
                     break;
 
                 default:
