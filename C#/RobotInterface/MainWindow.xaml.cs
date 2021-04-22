@@ -75,7 +75,6 @@ namespace RobotInterface
         {
             // Ici on envoi un message qui comprend SOF, Command, PayloadLength, Payload et CheckSum.
             byte checksum = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
-            checksum = 0xFE;
             byte[] msg = new byte[6 + msgPayloadLength];
             int pos = 0;
             msg[pos++] = 0xFE;
@@ -157,8 +156,7 @@ namespace RobotInterface
             //}
             //serialPort1.Write(byteList, 0, byteList.Length);
 
-            int msgFunction, msgPayloadLength;
-            msgFunction = 0x0080;
+            int msgFunction = 0x0080, msgPayloadLength;
             byte[] msgPayload = Encoding.ASCII.GetBytes(textBoxEmission.Text);
             msgPayloadLength = msgPayload.Length;
             UartEncodeAndSendMessage (msgFunction, msgPayloadLength, msgPayload);
@@ -184,7 +182,6 @@ namespace RobotInterface
 
         private void DecodeMessage(byte c)
         {
-            int pos = 0;
             switch (rcvState)
             {
                 case StateReception.Waiting:
@@ -232,12 +229,13 @@ namespace RobotInterface
                     byte receivedChecksum = c;
                     if (calculatedChecksum == receivedChecksum)
                     {
-                        textBoxReception.Text = "ouiiii!!!";
+                        textBoxReception.Text += "ouiiii!!!" + "\n";
+                        ProcessDecodeMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                         rcvState = StateReception.Waiting;
                     }
                     else
                     {
-                        textBoxReception.Text = "nooooon!!!!";
+                        textBoxReception.Text += "nooooon!!!!" + "\n";
                     }
                     
                     break;
@@ -245,6 +243,22 @@ namespace RobotInterface
                 default:
                     rcvState = StateReception.Waiting;
                     break;
+            }
+        }
+
+        private enum FonctionId
+        {
+            text = 0x0080,
+            led = 0x0020,
+            dist = 0x0030,
+            vit = 0x0040
+        }
+
+        void ProcessDecodeMessage (int msgFunction, int msgPayloadLenght, byte [] msgPayload)
+        {
+            if(msgFunction == (int)FonctionId.text)
+            {
+                textBoxReception.Text += "yes" + "\n";
             }
         }
     }
