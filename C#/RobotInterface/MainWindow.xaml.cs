@@ -75,6 +75,7 @@ namespace RobotInterface
         {
             // Ici on envoi un message qui comprend SOF, Command, PayloadLength, Payload et CheckSum.
             byte checksum = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
+            checksum = 0xFE;
             byte[] msg = new byte[6 + msgPayloadLength];
             int pos = 0;
             msg[pos++] = 0xFE;
@@ -194,20 +195,14 @@ namespace RobotInterface
                     break;
 
                 case StateReception.FunctionMSB:
-                    if (c == 0x00)
-                    {
-                        msgDecodedFunction = c;
-                        msgDecodedFunction = msgDecodedFunction << 8;
-                        rcvState = StateReception.FunctionLSB;
-                    }
+                    msgDecodedFunction = c;
+                    msgDecodedFunction = msgDecodedFunction << 8;
+                    rcvState = StateReception.FunctionLSB;
                     break;
 
                 case StateReception.FunctionLSB:
-                    if (c == 0x80)
-                    {
-                        msgDecodedFunction += c;
-                        rcvState = StateReception.PayloadLengthMSB;
-                    }
+                    msgDecodedFunction += c;
+                    rcvState = StateReception.PayloadLengthMSB;
                     break;
 
                 case StateReception.PayloadLengthMSB:
@@ -220,6 +215,7 @@ namespace RobotInterface
                 case StateReception.PayloadLengthLSB:
                     msgDecodedPayloadLength += c;
                     rcvState = StateReception.Payload;
+                    msgDecodedPayload = new byte[msgDecodedPayloadLength];
                     break;
 
                 case StateReception.Payload:
@@ -235,10 +231,14 @@ namespace RobotInterface
                     byte calculatedChecksum = CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                     byte receivedChecksum = c;
                     if (calculatedChecksum == receivedChecksum)
-                        {
-                            //success, on a un message valide
-
-                        }
+                    {
+                        textBoxReception.Text = "ouiiii!!!";
+                        rcvState = StateReception.Waiting;
+                    }
+                    else
+                    {
+                        textBoxReception.Text = "nooooon!!!!";
+                    }
                     
                     break;
 
