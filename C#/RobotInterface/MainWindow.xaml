@@ -30,7 +30,7 @@
     </GroupBox>
     <GroupBox x:Name ="groupBox2"  Header="Leds" BorderBrush=" #FF000000" Grid.Column="1" Grid.Row="5" Margin="10,40,240,-164" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Background="#FFCDCFB2" >
       <CheckBox x:Name="checkBox" Content="LED 1" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
-
+      <checkBox x:Name="checkBos1" content="LED 2" HorizontalAlignement="Left" Margin="10,50,0,0" VerticalAlignement="TOP"/> 
     </GroupBox>
     <GroupBox x:Name ="groupBox3"  Header="Télémetres IR" Background="#FFCDCFB2" BorderBrush=" #FF000000" Grid.Column="1" Grid.Row="5" Margin="125,40,0,-164" />
     <GroupBox x:Name ="groupBox4"  Header="Moteurs" Background="#FFCDCFB2" BorderBrush=" #FF000000" Grid.Column="1" Grid.Row="5" Margin="10,200,125,-317" >
