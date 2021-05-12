@@ -12,6 +12,7 @@
 #include "UART.h"
 #include "CB_TX1.h"
 #include "CB_RX1.h"
+#include "UART_Protocol.h"
 
 int main(void) {
     InitOscillator();
@@ -22,8 +23,6 @@ int main(void) {
     InitADC1();
     InitTimer4();
     InitUART();
-
-    
 
     while (1) {
         unsigned int * result = ADCGetResult();
@@ -70,7 +69,10 @@ int main(void) {
                 unsigned char c = CB_RX1_Get();
                 SendMessage(&c, 1);
             }
-            __delay32(10000);
+            __delay32(400000);
+            
+            unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
+            UartEncodeAndSendMessage(0x0080, 7, payload);
         }
     } // fin main
 }
