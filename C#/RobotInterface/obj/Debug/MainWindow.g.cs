@@ -81,7 +81,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 46 "..\..\MainWindow.xaml"
+        #line 39 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox checkBox_Copy;
         
@@ -89,7 +89,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 47 "..\..\MainWindow.xaml"
+        #line 40 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox checkBox_Copy1;
         
@@ -97,7 +97,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 48 "..\..\MainWindow.xaml"
+        #line 41 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox checkBox_Copy2;
         
@@ -105,7 +105,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 53 "..\..\MainWindow.xaml"
+        #line 45 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.GroupBox groupBoxTeleIR;
         
@@ -113,7 +113,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 66 "..\..\MainWindow.xaml"
+        #line 58 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock IRg;
         
@@ -121,7 +121,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 67 "..\..\MainWindow.xaml"
+        #line 59 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox textBox1;
         
@@ -129,7 +129,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 68 "..\..\MainWindow.xaml"
+        #line 60 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock IRc;
         
@@ -137,7 +137,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 69 "..\..\MainWindow.xaml"
+        #line 61 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox textBox2;
         
@@ -145,7 +145,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 70 "..\..\MainWindow.xaml"
+        #line 62 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock IRd;
         
@@ -153,7 +153,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 71 "..\..\MainWindow.xaml"
+        #line 63 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox textBox3;
         
@@ -161,7 +161,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 77 "..\..\MainWindow.xaml"
+        #line 69 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.GroupBox groupBoxMoteurs;
         
@@ -169,7 +169,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 89 "..\..\MainWindow.xaml"
+        #line 71 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock vitesseG;
         
@@ -177,15 +177,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 90 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox textBox4;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 91 "..\..\MainWindow.xaml"
+        #line 72 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock vitesseD;
         
@@ -193,15 +185,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 92 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox textBox5;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 97 "..\..\MainWindow.xaml"
+        #line 76 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button buttonEnvoyer;
         
@@ -209,7 +193,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 98 "..\..\MainWindow.xaml"
+        #line 77 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button boutonClear;
         
@@ -217,7 +201,7 @@ namespace RobotInterface {
         #line hidden
         
         
-        #line 99 "..\..\MainWindow.xaml"
+        #line 78 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button boutonTest;
         
@@ -312,36 +296,30 @@ namespace RobotInterface {
             this.vitesseG = ((System.Windows.Controls.TextBlock)(target));
             return;
             case 18:
-            this.textBox4 = ((System.Windows.Controls.TextBox)(target));
-            return;
-            case 19:
             this.vitesseD = ((System.Windows.Controls.TextBlock)(target));
             return;
-            case 20:
-            this.textBox5 = ((System.Windows.Controls.TextBox)(target));
-            return;
-            case 21:
+            case 19:
             this.buttonEnvoyer = ((System.Windows.Controls.Button)(target));
             
-            #line 97 "..\..\MainWindow.xaml"
+            #line 76 "..\..\MainWindow.xaml"
             this.buttonEnvoyer.Click += new System.Windows.RoutedEventHandler(this.buttonEnvoyer_Click);
             
             #line default
             #line hidden
             return;
-            case 22:
+            case 20:
             this.boutonClear = ((System.Windows.Controls.Button)(target));
             
-            #line 98 "..\..\MainWindow.xaml"
+            #line 77 "..\..\MainWindow.xaml"
             this.boutonClear.Click += new System.Windows.RoutedEventHandler(this.boutonClear_Click);
             
             #line default
             #line hidden
             return;
-            case 23:
+            case 21:
             this.boutonTest = ((System.Windows.Controls.Button)(target));
             
-            #line 99 "..\..\MainWindow.xaml"
+            #line 78 "..\..\MainWindow.xaml"
             this.boutonTest.Click += new System.Windows.RoutedEventHandler(this.boutonTest_Click);
             
             #line default
