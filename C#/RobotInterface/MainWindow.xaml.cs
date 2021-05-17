@@ -224,8 +224,6 @@ namespace RobotInterface
                     msgDecodedPayload = new byte[msgDecodedPayloadLength];
                     break;
 
-                   
-
                 case StateReception.Payload:
                     msgDecodedPayload [msgDecodedPayloadIndex] = (byte) c;
                     msgDecodedPayloadIndex++;
@@ -241,7 +239,7 @@ namespace RobotInterface
                     byte receivedChecksum = c;
                     if (calculatedChecksum == receivedChecksum)
                     {
-                        textBoxReception.Text += "ouiiii!!!" + "\n";
+                        //textBoxReception.Text += "ouiiii!!!" + "\n";
                         ProcessDecodeMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                         rcvState = StateReception.Waiting;
                     }
@@ -270,7 +268,13 @@ namespace RobotInterface
         {
             if(msgFunction == (int)FonctionId.text)
             {
-                textBoxReception.Text += "yes" + "\n";
+                textBoxReception.Text += "0x" + msgFunction.ToString("X4") + "\n";
+                textBoxReception.Text += msgPayloadLenght + "\n";
+                for (int i = 0; i < msgPayloadLenght; i++)
+                {
+                    textBoxReception.Text += Convert.ToChar(msgPayload[i]);
+                }
+                textBoxReception.Text += "\n";
             }
         }
     }

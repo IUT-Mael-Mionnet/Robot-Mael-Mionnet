@@ -14,6 +14,8 @@
 #include "CB_RX1.h"
 #include "UART_Protocol.h"
 
+int subCounter = 0;
+
 int main(void) {
     InitOscillator();
     InitIO();
@@ -69,8 +71,13 @@ int main(void) {
 //                unsigned char c = CB_RX1_Get();
 //                SendMessage(&c, 1);
 //            }
+            if (subCounter%10==0)
+            {
             unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
             UartEncodeAndSendMessage(0x0080, 7, payload);
+            subCounter=0;
+            }
+            subCounter++;
             //__delay32(400000);
         }
     } // fin main
