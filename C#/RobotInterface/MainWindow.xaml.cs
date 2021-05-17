@@ -188,6 +188,10 @@ namespace RobotInterface
                     if (c == 0xFE)
                     {
                         rcvState = StateReception.FunctionMSB;
+                        msgDecodedFunction = 0;
+                        msgDecodedPayloadLength = 0;
+                        //msgDecodedPayload;
+                        msgDecodedPayloadIndex = 0;
                     }
                     break;
 
@@ -210,13 +214,22 @@ namespace RobotInterface
 
                 case StateReception.PayloadLengthLSB:
                     msgDecodedPayloadLength += c;
-                    rcvState = StateReception.Payload;
+                    if (msgDecodedPayloadLength == 0) {
+                        rcvState = StateReception.Waiting;
+                    }
+                    else {
+                        rcvState = StateReception.Payload;
+                        
+                    }
                     msgDecodedPayload = new byte[msgDecodedPayloadLength];
                     break;
 
+                   
+
                 case StateReception.Payload:
-                    msgDecodedPayload[msgDecodedPayloadIndex] = c;
+                    msgDecodedPayload [msgDecodedPayloadIndex] = (byte) c;
                     msgDecodedPayloadIndex++;
+
                     if (msgDecodedPayloadIndex == msgDecodedPayloadLength)
                     {
                         rcvState = StateReception.CheckSum;
