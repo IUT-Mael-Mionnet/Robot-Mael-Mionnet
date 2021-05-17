@@ -63,16 +63,15 @@ int main(void) {
                 LED_BLANCHE = 0; //Sinon LED éteinte
 
             //SendMessage((unsigned char *)"salut", 5);
-            int i;
-            for (i = 0; i< CB_RX1_GetDataSize(); i++)
-            {
-                unsigned char c = CB_RX1_Get();
-                SendMessage(&c, 1);
-            }
-            __delay32(400000);
-            
+//            int i;
+//            for (i = 0; i< CB_RX1_GetDataSize(); i++)
+//            {
+//                unsigned char c = CB_RX1_Get();
+//                SendMessage(&c, 1);
+//            }
             unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
             UartEncodeAndSendMessage(0x0080, 7, payload);
+            //__delay32(400000);
         }
     } // fin main
 }

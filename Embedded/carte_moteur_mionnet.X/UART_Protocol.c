@@ -1,54 +1,50 @@
 #include <xc.h>
-#include ?UART_Protocol.h?
+#include "UART_Protocol.h"
 #include "UART.h"
+#include "CB_TX1.h"
 
-unsigned char UartCalculateChecksum(int msgFunction,int msgPayloadLength, unsigned char* msgPayload)
+unsigned char UartCalculateChecksum(int msgFunction, int msgPayloadLength, unsigned char * msgPayload)
 {
 //Fonction prenant entrée la trame et sa longueur pour calculer le checksum
-    char checksum;
+    unsigned char checksum;
     checksum = 0xFE;
     checksum ^= (char) (msgFunction >>8);
     checksum ^= (char) (msgFunction >>0);
     checksum ^= (char) (msgPayloadLength >>8);
     checksum ^= (char) (msgPayloadLength >>0);
-    
-    for ( int i = 0 ; i < msgPayloadLength ; i++)
+    int i = 0;
+    for (i = 0; i < msgPayloadLength; i++)
     {
-        checksum ^= msgPayload;
+        checksum ^= msgPayload[i];
     }
-    
     return checksum;
 }
 
 void UartEncodeAndSendMessage(int msgFunction,int msgPayloadLength, unsigned char* msgPayload)
 {
-    //Fonction d?encodage et d?envoi d?un message
-    char cheksum = UartCalculateChecksum (int msgFunction,int msgPayloadLength , unsigned char* msgPayload);
-    unsigned char msg = new char [ 6 + msgPayloadLength ];
+    unsigned char checksum;
+    checksum = UartCalculateChecksum (msgFunction, msgPayloadLength, msgPayload);
+    unsigned char * msg;
     int pos = 0;
     msg[pos++] = 0xFE;
     msg[pos++] = (char)(msgFunction >> 8);
     msg[pos++] = (char)(msgFunction >> 0);
     msg[pos++] = (char)(msgPayloadLength >> 8);
     msg[pos++] = (char)(msgPayloadLength >> 0);
-    
-    for(int i = 0; i < msgPayloadLength; i++)
+    int i = 0;
+    for( i = 0; i < msgPayloadLength; i++)
     {
         msg[pos++] = msgPayload[i];
     }
-    for (i = 0; i < 6 + msgPayloadLength ; i++)
-    {
-        while (U1STAbits.UTXBF); // wait while Tx buffer full
-        U1TXREG = *(message) ++; //Transmit one character
-    }
-    
+    msg[pos++] = checksum;
+    SendMessage(msg, pos);
 }
 
-//int msgDecodedFunction = 0;
-//int msgDecodedPayloadLength = 0;
-//unsigned char msgDecodedPayload[128];
-//int msgDecodedPayloadIndex = 0;
-//
+int msgDecodedFunction = 0;
+int msgDecodedPayloadLength = 0;
+unsigned char msgDecodedPayload[128];
+int msgDecodedPayloadIndex = 0;
+
 //void UartDecodeMessage(unsigned char c)
 //{
 ////Fonction prenant en entrée un octet et servant à reconstituer les trames
