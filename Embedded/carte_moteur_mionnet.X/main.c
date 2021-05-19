@@ -73,13 +73,19 @@ int main(void) {
 //            }
             if (subCounter%10==0)
             {
+                
             unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
-            UartEncodeAndSendMessage(0x0080, 7, payload);
+            
+            int size = sizeof(payload)/sizeof(char);
+            
+            UartEncodeAndSendMessage(0x0080, size, payload);
             subCounter=0;
             }
             subCounter++;
-            //__delay32(400000);
+            __delay32(400000);
         }
+        //envoi au télemètre:
+        
     } // fin main
 }
 
