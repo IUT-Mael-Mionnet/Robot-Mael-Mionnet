@@ -79,10 +79,14 @@ int main(void) {
             int size = sizeof(payload)/sizeof(char);
             
             UartEncodeAndSendMessage(0x0080, size, payload);
+            
             subCounter=0;
+            envoi_IR (robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit,robotState.distanceTelemetreGauche);
             }
             subCounter++;
             __delay32(400000);
+            
+            
         }
         //envoi au télemètre:
         
@@ -203,6 +207,23 @@ void OperatingSystemLoop(void) {
 }
 
 unsigned char nextStateRobot = 0;
+
+void envoi_IR(int irc, int ird, int irg){
+    
+        int size_irc = sizeof(irc)/sizeof(int);
+//        int size_ird = sizeof(ird)/sizeof(int);
+//        int size_irg = sizeof(irg)/sizeof(int);
+        
+        UartEncodeAndSendMessage(0x0030, size_irc, irc);
+        subCounter=0;
+        __delay32(400000);
+//        UartEncodeAndSendMessage(0x0030, size_ird, ird);
+//        subCounter=0;
+//        __delay32(4000);
+//        UartEncodeAndSendMessage(0x0030, size_irg, irg);
+//        subCounter=0;
+//        __delay32(4000);
+}
 
 void SetNextRobotStateInAutomaticMode() {
     unsigned char positionObstacle = PAS_D_OBSTACLE;
