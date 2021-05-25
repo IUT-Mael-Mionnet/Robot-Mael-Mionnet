@@ -74,14 +74,20 @@ int main(void) {
             if (subCounter%10==0)
             {
                 
-            unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
+//            unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
+//            
+//            int size = sizeof(payload)/sizeof(char);
+//            
+//            UartEncodeAndSendMessage(0x0080, size, payload);
+            
+            unsigned char payload  = (char) (robotState.distanceTelemetreGauche);
             
             int size = sizeof(payload)/sizeof(char);
             
-            UartEncodeAndSendMessage(0x0080, size, payload);
+            UartEncodeAndSendMessage(0x0030, size, payload);
             
             subCounter=0;
-            envoi_IR (robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit,robotState.distanceTelemetreGauche);
+            //envoi_IR (robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit,robotState.distanceTelemetreGauche);
             }
             subCounter++;
             __delay32(400000);
