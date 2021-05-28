@@ -13,7 +13,7 @@ void InitTimer23(void) {
     T2CONbits.TON = 0; // Stop any 16/32-bit Timer3 operation
     T2CONbits.T32 = 1; // Enable 32-bit Timer mode
     T2CONbits.TCS = 0; // Select internal instruction cycle clock
-    T2CONbits.TCKPS = 0b00; // Select 1:1 Prescaler
+    T2CONbits.TCKPS = 0b01; // Select 1:1 Prescaler
     TMR3 = 0x00; // Clear 32-bit Timer (msw)
     TMR2 = 0x00; // Clear 32-bit Timer (lsw)
     float f23;

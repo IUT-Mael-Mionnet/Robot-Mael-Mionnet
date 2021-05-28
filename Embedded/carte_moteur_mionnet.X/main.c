@@ -27,10 +27,11 @@ int main(void) {
     InitUART();
 
     while (1) {
-        unsigned int * result = ADCGetResult();
+
         if (ADCIsConversionFinished() == 1) //Conversion des données en distance (cm)
         {
             ADCClearConversionFinishedFlag();
+            unsigned int * result = ADCGetResult();
             float volts = ((float) result[1]) * 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreDroit = 34 / volts - 5;
 
@@ -46,7 +47,7 @@ int main(void) {
             volts = ((float) result[0]) * 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtremeDroit = 34 / volts - 5;
 
-            if (robotState.distanceTelemetreExtremeDroit < 20) // Si obstacle < 30 cm alors LED orange allumé
+            if (robotState.distanceTelemetreDroit < 20) // Si obstacle < 30 cm alors LED orange allumé
                 LED_ORANGE = 1;
 
             else
@@ -58,44 +59,43 @@ int main(void) {
             else
                 LED_BLEUE = 0; //Sinon LED éteinte
 
-            if (robotState.distanceTelemetreExtremeGauche < 20) // Si obstacle < 30 cm alors LED blanche allumé
+            if (robotState.distanceTelemetreGauche < 20) // Si obstacle < 30 cm alors LED blanche allumé
                 LED_BLANCHE = 1;
 
             else
                 LED_BLANCHE = 0; //Sinon LED éteinte
 
             //SendMessage((unsigned char *)"salut", 5);
-//            int i;
-//            for (i = 0; i< CB_RX1_GetDataSize(); i++)
-//            {
-//                unsigned char c = CB_RX1_Get();
-//                SendMessage(&c, 1);
-//            }
-            if (subCounter%10==0)
-            {
-                
-//            unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
-//            
-//            int size = sizeof(payload)/sizeof(char);
-//            
-//            UartEncodeAndSendMessage(0x0080, size, payload);
-            
-            unsigned char payload  = (char) (robotState.distanceTelemetreGauche);
-            
-            int size = sizeof(payload)/sizeof(char);
-            
-            UartEncodeAndSendMessage(0x0030, size, payload);
-            
-            subCounter=0;
-            //envoi_IR (robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit,robotState.distanceTelemetreGauche);
+            //            int i;
+            //            for (i = 0; i< CB_RX1_GetDataSize(); i++)
+            //            {
+            //                unsigned char c = CB_RX1_Get();
+            //                SendMessage(&c, 1);
+            //            }
+            if (subCounter % 10 == 0) {
+
+//                unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
+//
+//                int size = sizeof (payload) / sizeof (char);
+//
+//                UartEncodeAndSendMessage(0x0030, size, payload);
+
+                unsigned char payload  = (char) (robotState.distanceTelemetreGauche);
+                            
+                int size = sizeof(payload)/sizeof(char);
+                            
+                UartEncodeAndSendMessage(0x0030, size, payload);
+                            
+                subCounter = 0;
+                //envoi_IR (robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit,robotState.distanceTelemetreGauche);
             }
             subCounter++;
             __delay32(400000);
-            
-            
+
+
         }
         //envoi au télemètre:
-        
+
     } // fin main
 }
 
@@ -214,21 +214,21 @@ void OperatingSystemLoop(void) {
 
 unsigned char nextStateRobot = 0;
 
-void envoi_IR(int irc, int ird, int irg){
-    
-        int size_irc = sizeof(irc)/sizeof(int);
-//        int size_ird = sizeof(ird)/sizeof(int);
-//        int size_irg = sizeof(irg)/sizeof(int);
-        
-        UartEncodeAndSendMessage(0x0030, size_irc, irc);
-        subCounter=0;
-        __delay32(400000);
-//        UartEncodeAndSendMessage(0x0030, size_ird, ird);
-//        subCounter=0;
-//        __delay32(4000);
-//        UartEncodeAndSendMessage(0x0030, size_irg, irg);
-//        subCounter=0;
-//        __delay32(4000);
+void envoi_IR(int irc, int ird, int irg) {
+
+    int size_irc = sizeof (irc) / sizeof (int);
+    //        int size_ird = sizeof(ird)/sizeof(int);
+    //        int size_irg = sizeof(irg)/sizeof(int);
+
+    UartEncodeAndSendMessage(0x0030, size_irc, irc);
+    subCounter = 0;
+    __delay32(400000);
+    //        UartEncodeAndSendMessage(0x0030, size_ird, ird);
+    //        subCounter=0;
+    //        __delay32(4000);
+    //        UartEncodeAndSendMessage(0x0030, size_irg, irg);
+    //        subCounter=0;
+    //        __delay32(4000);
 }
 
 void SetNextRobotStateInAutomaticMode() {
