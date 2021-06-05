@@ -66,7 +66,6 @@ namespace RobotInterface
             {
                 checksum ^= (byte)(msgPayload [i]);
             }
-            // soit a est la valeur qui fait le ou exclusif de SOF,COMMAND,PAYLOADLENGTH et PAYLOAD
             return checksum;
             //on retourne la valeur de l'octet Checksum.
         }
@@ -134,9 +133,6 @@ namespace RobotInterface
             {
                 byte byteReceived = robot.byteListReceived.Dequeue();
                 DecodeMessage(byteReceived);
-                //string blabla;
-                //blabla = "0x" + byteReceived.ToString("X2")+" ";
-                //textBoxReception.Text += blabla;
             }
             
         
