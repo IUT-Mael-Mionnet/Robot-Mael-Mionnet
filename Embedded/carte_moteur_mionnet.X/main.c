@@ -65,31 +65,21 @@ int main(void) {
             else
                 LED_BLANCHE = 0; //Sinon LED éteinte
 
-            //SendMessage((unsigned char *)"salut", 5);
-            //            int i;
-            //            for (i = 0; i< CB_RX1_GetDataSize(); i++)
-            //            {
-            //                unsigned char c = CB_RX1_Get();
-            //                SendMessage(&c, 1);
-            //            }
-            
-            if (subCounter % 10 == 0) {
-                
-                unsigned char payload [] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
-//
-                int size = sizeof (payload) / sizeof (char);
-//
+//            SendMessage((unsigned char *)"salut", 5);
+//                int i;
+//                for (i = 0; i< CB_RX1_GetDataSize(); i++)
+//                {
+//                    unsigned char c = CB_RX1_Get();
+//                    SendMessage(&c, 1);
+//                }
+            if (subCounter % 10 == 0){
+                unsigned char payload [] = "Bonjour";
+                int size = sizeof (payload);
+              size = size - 1;
                 UartEncodeAndSendMessage(0x0080, size, payload);
-//                unsigned char payload  = (char) (robotState.distanceTelemetreGauche);
-//                int size = sizeof(payload)/sizeof(char);
-//                UartEncodeAndSendMessage(0x0030, size, payload);
-                subCounter = 0;
-//                //envoi_IR (robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit,robotState.distanceTelemetreGauche);
             }
             subCounter++;
-            //__delay32(1000);
-
-
+            __delay32(1000);
         }
         //envoi au télemètre:
 
