@@ -44,7 +44,7 @@ void UartEncodeAndSendMessage(int msgFunction,int msgPayloadLength, unsigned cha
 int msgDecodedFunction = 0;
 int msgDecodedPayloadLength = 0;
 unsigned char msgDecodedPayload[128];
-int msgDecodedPayloadIndex = 0;
+//int msgDecodedPayloadIndex = 0;
 
 
 
@@ -52,98 +52,76 @@ int msgDecodedPayloadIndex = 0;
 
 void UartDecodedMessage(unsigned char c)
 {
-    int msgDecodedFunction = 0;
-        int msgDecodedPayloadLength = 0;
-        unsigned char msgDecodedPayload;
-        int msgDecodedPayloadIndex = 0;
+    int static msgDecodedFunction;
+    int static msgDecodedPayloadLength;
+    unsigned char msgDecodedPayload[msgDecodedPayloadLength];
+    int static msgDecodedPayloadIndex = 0;
+    int i;
 
-        
-    int rcvState;
+ 
+    int static rcvState;
+    rcvState = Waiting;
     
-            switch (rcvState){
-            case Waiting:
-                if (c == 0xFE)
-                {
-                    rcvState = Function_MSB;
-                    msgDecodedFunction = 0;
-//                    msgDecodedPayloadLength = 0;
-                    msgDecodedPayload =0;
-                    msgDecodedPayloadIndex = 0;
-                }
-                break;
-
-            case Function_MSB:
-                msgDecodedFunction = c;
-                msgDecodedFunction = msgDecodedFunction << 8;
-                rcvState = Function_LSB;
-                break;
-
-            case Function_LSB:
-                msgDecodedFunction += c;
-                rcvState = PayloadLength_MSB;
-                break;
-
-            case PayloadLength_MSB:
-                msgDecodedPayloadLength = c;
-                msgDecodedPayloadLength = (msgDecodedPayloadLength << 8);
-                rcvState = PayloadLength_LSB;
-                break;
-
-            case PayloadLength_LSB:
-                msgDecodedPayloadLength += c;
-                if (msgDecodedPayloadLength == 0) {
-                    rcvState = Waiting;
-                }
-                else {
-                    rcvState = Payload;
-
-                }
-//                msgDecodedPayload = msgDecodedPayloadLength;
-                break;
-
-            case Payload:
-                msgDecodedPayload [msgDecodedPayloadIndex] = c;
-                msgDecodedPayloadIndex++;
-
-                if (msgDecodedPayloadIndex == msgDecodedPayloadLength)
-                {
-                    rcvState = CheckSum;
-                }
-                break;
-
-            case CheckSum:
+        switch (rcvState){
+            
+        case Waiting:
+            if (c == 0xFE) {
+                rcvState = Function_MSB;
                 
-                unsigned calculatedChecksum = UartCalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
-                
-                unsigned char receivedChecksum = c;
-                
-                if (calculatedChecksum == receivedChecksum)
-                {
-                    UartProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
-                    rcvState = Waiting;
-                }
-                else
-                {
-                    rcvState = Waiting;
-                }
-
-                break;
-
-//            default:
-//                rcvState = Waiting;
-//                break;
             }
+            break;
+
+        case Function_MSB:
+            msgDecodedFunction = c;
+            msgDecodedFunction = msgDecodedFunction << 8;
+            rcvState = Function_LSB;
+            break;
+
+        case Function_LSB:
+            msgDecodedFunction += c;
+            rcvState = PayloadLength_MSB;
+            break;
+
+        case PayloadLength_MSB:
+            msgDecodedPayloadLength = c;
+            msgDecodedPayloadLength = msgDecodedPayloadLength << 8;
+            rcvState = PayloadLength_LSB;
+            break;
+
+        case PayloadLength_LSB:
+            msgDecodedPayloadLength += c;
+            rcvState = Payload;
+            break;
+
+        case Payload:
+            
+            for (i=0;i<msgDecodedPayloadLength;i++){
+                int decalage;
+                decalage = msgDecodedPayloadLength-i;
+                msgDecodedPayload[i]= c << decalage;
+            }
+            rcvState = CheckSum;
+            break;
+
+        case CheckSum:
+            rcvState = Waiting;
+            break;
+
+        default:
+            rcvState = Waiting;
+            break;
+        }
         
 //Fonction appelée après le décodage pour exécuter l?action
 //correspondant au message reçu
 //?
 }
 
-void UartProcessDecodedMessage(unsigned char function,unsigned char payloadLength, unsigned char* payload)
-{
-//Fonction prenant en entrée un octet et servant à reconstituer les trames
-//?
-}
+//void UartProcessDecodedMessage(unsigned char function,unsigned char payloadLength, unsigned char* payload)
+//{
+////Fonction prenant en entrée un octet et servant à reconstituer les trames
+////?
+//}
 
  
 
