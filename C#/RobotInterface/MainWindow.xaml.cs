@@ -235,7 +235,7 @@ namespace RobotInterface
                     byte receivedChecksum = c;
                     if (calculatedChecksum == receivedChecksum)
                     {
-                        textBoxReception.Text += "ouiiii!!!" + "\n";
+                        //textBoxReception.Text += "ouiiii!!!" + "\n";
                         ProcessDecodeMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                         rcvState = StateReception.Waiting;
                     }
@@ -258,28 +258,73 @@ namespace RobotInterface
             text = 0x0080,
             led = 0x0020,
             dist = 0x0030,
-            vit = 0x0040
+            vit = 0x0040,
+            etat = 0x0050
+        }
+
+        private enum StateRobot
+        {
+            STATE_ATTENTE = 0,
+            STATE_ATTENTE_EN_COURS = 1,
+            STATE_AVANCE = 2,
+            STATE_AVANCE_EN_COURS = 3,
+            STATE_TOURNE_GAUCHE = 4,
+            STATE_TOURNE_GAUCHE_EN_COURS = 5,
+            STATE_TOURNE_DROITE = 6,
+            STATE_TOURNE_DROITE_EN_COURS = 7,
+            STATE_TOURNE_SUR_PLACE_GAUCHE = 8,
+            STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS = 9,
+            STATE_TOURNE_SUR_PLACE_DROITE = 10,
+            STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS = 11,
+            STATE_ARRET = 12,
+            STATE_ARRET_EN_COURS = 13,
+            STATE_RECULE = 14,
+            STATE_RECULE_EN_COURS = 15,
+            STATE_RALENTI = 16,
+            STATE_RALENTI_EN_COURS = 17,
+            STATE_TOURNE_UN_PEU_GAUCHE = 18,
+            STATE_TOURNE_UN_PEU_GAUCHE_EN_COURS = 19,
+            STATE_TOURNE_UN_PEU_DROITE = 20,
+            STATE_TOURNE_UN_PEU_DROITE_EN_COURS = 21,
         }
 
         void ProcessDecodeMessage (int msgFunction, int msgPayloadLenght, byte [] msgPayload)
         {
+            //textBoxReception.Text += "0x" + msgFunction.ToString("X4") + "\n";
+            //textBoxReception.Text += msgPayloadLenght + "\n";
             if (msgFunction == (int)FonctionId.dist)
             {
-                textBox1.Text = "";
-                for(int i = 0; i < msgPayloadLenght; i++)
-                {
-                    textBox1.Text += Convert.ToChar(msgPayload[i]);
-                }
+                IRGauche.Text = "";
+                IRGauche.Text += msgPayload[0] + " cm";
+                IRCentre.Text = "";
+                IRCentre.Text += msgPayload[1] + " cm";
+                IRDroit.Text = "";
+                IRDroit.Text += msgPayload[2] + " cm";
+
             }
             if(msgFunction == (int)FonctionId.text)
             {
-                textBoxReception.Text += "0x" + msgFunction.ToString("X4") + "\n";
-                textBoxReception.Text += msgPayloadLenght + "\n";
                 for (int i = 0; i < msgPayloadLenght; i++)
                 {
                     textBoxReception.Text += Convert.ToChar(msgPayload[i]);
                 }
                 textBoxReception.Text += "\n";
+            }
+
+            if (msgFunction == (int)FonctionId.etat)
+            {
+                //textBoxReception.Text += msgPayload[0] + "\n";
+
+                RBTrecept.Text = "";
+                int instant = (( (int)msgPayload[1]) << 24) + (( (int)msgPayload[2]) << 16) + (( (int)msgPayload[3]) << 8) + ( (int)msgPayload[4]);
+                RBTrecept.Text += " \nRobot State : " + ((StateRobot)(msgPayload[0])).ToString() + "−" + instant.ToString() + " ms";
+
+
+//                for (int i = 1; i < msgPayloadLenght; i++)
+//                {
+//                    textBoxReception.Text += msgPayload[i];
+//                }
+                
             }
         }
     }

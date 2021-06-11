@@ -41,25 +41,20 @@ void UartEncodeAndSendMessage(int msgFunction,int msgPayloadLength, unsigned cha
    
 }
 
-int msgDecodedFunction = 0;
-int msgDecodedPayloadLength = 0;
-unsigned char msgDecodedPayload[128];
-//int msgDecodedPayloadIndex = 0;
-
-
-
-
-
+/*
 void UartDecodedMessage(unsigned char c)
 {
     int static msgDecodedFunction;
     int static msgDecodedPayloadLength;
     unsigned char msgDecodedPayload[msgDecodedPayloadLength];
-    int static msgDecodedPayloadIndex = 0;
+    //int static msgDecodedPayloadIndex = 0;
+    int CalculCheckSum;
+    int RecuCheckSum;
     int i;
 
  
     int static rcvState;
+    
     rcvState = Waiting;
     
         switch (rcvState){
@@ -104,6 +99,17 @@ void UartDecodedMessage(unsigned char c)
             break;
 
         case CheckSum:
+            RecuCheckSum = c ;
+            CalculCheckSum = UartCalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+            if (CalculCheckSum == RecuCheckSum)
+            {
+                UartProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+                rcvState = Waiting;
+            }
+            else
+            {
+                rcvState = Waiting;
+            }
             rcvState = Waiting;
             break;
 
@@ -117,14 +123,19 @@ void UartDecodedMessage(unsigned char c)
 //?
 }
 
-//void UartProcessDecodedMessage(unsigned char function,unsigned char payloadLength, unsigned char* payload)
+
+*/
+
+//void UartProcessDecodedMessage(unsigned char function, unsigned char payloadLength, unsigned char* payload)
 //{
 ////Fonction prenant en entrée un octet et servant à reconstituer les trames
 ////?
 //}
-
- 
-
-//*************************************************************************/
-//Fonctions correspondant aux messages
-//*************************************************************************/
+//
+// 
+//
+////*************************************************************************/
+////Fonctions correspondant aux messages
+////*************************************************************************/
+//
+//
