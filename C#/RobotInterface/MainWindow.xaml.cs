@@ -141,6 +141,11 @@ namespace RobotInterface
         private void boutonClear_Click(object sender, RoutedEventArgs e)
         {
             textBoxReception.Text = "";
+            IRGauche.Text = "";
+            IRDroit.Text = "";
+            IRCentre.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
         }
 
         private void boutonTest_Click(object sender, RoutedEventArgs e)

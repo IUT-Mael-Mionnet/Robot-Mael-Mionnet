@@ -27,8 +27,10 @@ int main(void) {
     InitUART();
 
     while (1) {
+   
 
-        if (ADCIsConversionFinished() == 1) //Conversion des données en distance (cm)
+
+        if (ADCIsConversionFinished() == 1  ) //Conversion des données en distance (cm)
         {
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult();
@@ -72,19 +74,25 @@ int main(void) {
 //                    unsigned char c = CB_RX1_Get();
 //                    SendMessage(&c, 1);
 //                }
-            if (subCounter % 10 == 0){
-                unsigned char payload [3];
-                payload [0]= (char) (robotState.distanceTelemetreGauche);
-                payload [1]= (char) (robotState.distanceTelemetreCentre);
-                payload [2]= (char) (robotState.distanceTelemetreDroit);
-                int size = sizeof (payload);
-                UartEncodeAndSendMessage(0x0030, size, payload);
+//            if (subCounter % 10 == 0){
+//                unsigned char payload [3];
+//                payload [0]= (char) (robotState.distanceTelemetreGauche);
+//                payload [1]= (char) (robotState.distanceTelemetreCentre);
+//                payload [2]= (char) (robotState.distanceTelemetreDroit);
+//                int size = sizeof (payload);
+//                UartEncodeAndSendMessage(0x0030, size, payload);
+//            }
+//            subCounter++;
+//            __delay32(40000);
+            if (CB_RX1_IsDataAvailable()){
+                int i;
+                for (i = 0; i = CB_RX1_GetDataSize(); i++){
+                    LED_BLANCHE = !LED_BLANCHE;
+                    UartDecodedMessage(CB_RX1_Get());
+                }
             }
-            subCounter++;
-            __delay32(40000);
         }
         //envoi au télemètre:
-
     } 
 }// fin main
 
@@ -203,23 +211,6 @@ void OperatingSystemLoop(void) {
 
 unsigned char nextStateRobot = 0;
 
-void envoi_IR(int irc, int ird, int irg) {
-
-    int size_irc = sizeof (irc) / sizeof (int);
-    //        int size_ird = sizeof(ird)/sizeof(int);
-    //        int size_irg = sizeof(irg)/sizeof(int);
-
-    UartEncodeAndSendMessage(0x0030, size_irc, irc);
-    subCounter = 0;
-    __delay32(400000);
-    //        UartEncodeAndSendMessage(0x0030, size_ird, ird);
-    //        subCounter=0;
-    //        __delay32(4000);
-    //        UartEncodeAndSendMessage(0x0030, size_irg, irg);
-    //        subCounter=0;
-    //        __delay32(4000);
-}
-
 void SetNextRobotStateInAutomaticMode() {
     unsigned char positionObstacle = PAS_D_OBSTACLE;
 
@@ -325,18 +316,18 @@ void SetNextRobotStateInAutomaticMode() {
 
 
     //Si l?on n?est pas dans la transition de l?étape en cours
-    if (nextStateRobot != stateRobot - 1)
-    {
-        //On attribue le nouvel état du robot
-        stateRobot = nextStateRobot;
-        //On envoie à la supervision le nouvel état du robot
-        unsigned char payload [4];
-        payload [0] = (char) (stateRobot);
-        payload [1] = (char) (timestamp >> 24);
-        payload [2] = (char) (timestamp >> 16);
-        payload [3] = (char) (timestamp >> 8);
-        payload [4] = (char) (timestamp >> 0);
-        //int sizeState = sizeof (payload);
-        UartEncodeAndSendMessage(0x0050, 5, payload);
-    }
-}
+//    if (nextStateRobot != stateRobot - 1)
+//    {
+//        //On attribue le nouvel état du robot
+//        stateRobot = nextStateRobot;
+//        //On envoie à la supervision le nouvel état du robot
+//        unsigned char payload [5];
+//        payload [0] = (char) (stateRobot);
+//        payload [1] = (char) (timestamp >> 24);
+//        payload [2] = (char) (timestamp >> 16);
+//        payload [3] = (char) (timestamp >> 8);
+//        payload [4] = (char) (timestamp >> 0);
+//        //int sizeState = sizeof (payload);
+//        UartEncodeAndSendMessage(0x0050, 5, payload);
+//    }
+} 

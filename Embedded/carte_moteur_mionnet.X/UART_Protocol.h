@@ -9,11 +9,17 @@
 #define	Payload 5
 #define	CheckSum 6
 
+#define	attente 0
+#define SET_ROBOT_STATE 0x0051
+#define SET_ROBOT_MANUAL_CONTROL 0x0052
+
 
 void UartEncodeAndSendMessage();
 unsigned char UartCalculateChecksum();
 void UartDecodeMessage();
 void UartProcessDecodedMessage();
+void SetRobotState();
+void SetRobotAutoControlState();
 
 
 #endif	/* UART_PROTOCOL_H */
