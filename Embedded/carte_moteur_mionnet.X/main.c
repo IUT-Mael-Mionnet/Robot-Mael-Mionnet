@@ -28,8 +28,6 @@ int main(void) {
 
     while (1) {
    
-
-
         if (ADCIsConversionFinished() == 1  ) //Conversion des données en distance (cm)
         {
             ADCClearConversionFinishedFlag();
@@ -49,23 +47,23 @@ int main(void) {
             volts = ((float) result[0]) * 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtremeDroit = 34 / volts - 5;
 
-            if (robotState.distanceTelemetreDroit < 20) // Si obstacle < 30 cm alors LED orange allumé
-                LED_ORANGE = 1;
-
-            else
-                LED_ORANGE = 0; //Sinon LED éteinte
-
-            if (robotState.distanceTelemetreCentre < 20) // Si obstacle < 30 cm alors LED bleue allumé
-                LED_BLEUE = 1;
-
-            else
-                LED_BLEUE = 0; //Sinon LED éteinte
-
-            if (robotState.distanceTelemetreGauche < 20) // Si obstacle < 30 cm alors LED blanche allumé
-                LED_BLANCHE = 1;
-
-            else
-                LED_BLANCHE = 0; //Sinon LED éteinte
+//            if (robotState.distanceTelemetreDroit < 20) // Si obstacle < 30 cm alors LED orange allumé
+//                LED_BLEUE = 1;
+//
+//            //else
+//                //LED_ORANGE = 0; //Sinon LED éteinte
+//
+//            if (robotState.distanceTelemetreCentre < 20) // Si obstacle < 30 cm alors LED bleue allumé
+//                LED_BLEUE = 1;
+//
+//            else
+//                LED_BLEUE = 0; //Sinon LED éteinte
+//
+//            if (robotState.distanceTelemetreGauche < 20) // Si obstacle < 30 cm alors LED blanche allumé
+//                LED_BLANCHE = 1;
+//
+//            else
+//                LED_BLANCHE = 0; //Sinon LED éteinte
 
 //            SendMessage((unsigned char *)"salut", 5);
 //                int i;
@@ -74,20 +72,19 @@ int main(void) {
 //                    unsigned char c = CB_RX1_Get();
 //                    SendMessage(&c, 1);
 //                }
-//            if (subCounter % 10 == 0){
-//                unsigned char payload [3];
-//                payload [0]= (char) (robotState.distanceTelemetreGauche);
-//                payload [1]= (char) (robotState.distanceTelemetreCentre);
-//                payload [2]= (char) (robotState.distanceTelemetreDroit);
-//                int size = sizeof (payload);
-//                UartEncodeAndSendMessage(0x0030, size, payload);
-//            }
-//            subCounter++;
+            if (subCounter % 10 == 0){
+                unsigned char payload [3];
+                payload [0]= (char) (robotState.distanceTelemetreGauche);
+                payload [1]= (char) (robotState.distanceTelemetreCentre);
+                payload [2]= (char) (robotState.distanceTelemetreDroit);
+                int size = sizeof (payload);
+                UartEncodeAndSendMessage(0x0030, size, payload);
+            }
+            subCounter++;
 //            __delay32(40000);
             if (CB_RX1_IsDataAvailable()){
                 int i;
                 for (i = 0; i = CB_RX1_GetDataSize(); i++){
-                    LED_BLANCHE = !LED_BLANCHE;
                     UartDecodedMessage(CB_RX1_Get());
                 }
             }
@@ -316,18 +313,18 @@ void SetNextRobotStateInAutomaticMode() {
 
 
     //Si l?on n?est pas dans la transition de l?étape en cours
-//    if (nextStateRobot != stateRobot - 1)
-//    {
-//        //On attribue le nouvel état du robot
-//        stateRobot = nextStateRobot;
-//        //On envoie à la supervision le nouvel état du robot
-//        unsigned char payload [5];
-//        payload [0] = (char) (stateRobot);
-//        payload [1] = (char) (timestamp >> 24);
-//        payload [2] = (char) (timestamp >> 16);
-//        payload [3] = (char) (timestamp >> 8);
-//        payload [4] = (char) (timestamp >> 0);
-//        //int sizeState = sizeof (payload);
-//        UartEncodeAndSendMessage(0x0050, 5, payload);
-//    }
+    if (nextStateRobot != stateRobot - 1)
+    {
+        //On attribue le nouvel état du robot
+        stateRobot = nextStateRobot;
+        //On envoie à la supervision le nouvel état du robot
+        unsigned char payload [5];
+        payload [0] = (char) (stateRobot);
+        payload [1] = (char) (timestamp >> 24);
+        payload [2] = (char) (timestamp >> 16);
+        payload [3] = (char) (timestamp >> 8);
+        payload [4] = (char) (timestamp >> 0);
+        //int sizeState = sizeof (payload);
+        UartEncodeAndSendMessage(0x0050, 5, payload);
+    }
 } 

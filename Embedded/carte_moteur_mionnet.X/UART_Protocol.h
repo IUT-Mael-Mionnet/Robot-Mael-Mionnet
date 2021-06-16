@@ -10,9 +10,13 @@
 #define	CheckSum 6
 
 #define	attente 0
+
+#define text 0x0080
+#define led 0x0020
+#define dist 0x0030
+#define vit 0x0040
 #define SET_ROBOT_STATE 0x0051
 #define SET_ROBOT_MANUAL_CONTROL 0x0052
-
 
 void UartEncodeAndSendMessage();
 unsigned char UartCalculateChecksum();

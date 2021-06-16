@@ -2,6 +2,7 @@
 #include "UART_Protocol.h"
 #include "UART.h"
 #include "CB_TX1.h"
+#include "IO.h"
 
 unsigned char UartCalculateChecksum(int msgFunction, int msgPayloadLength, unsigned char * msgPayload)
 {
@@ -41,17 +42,16 @@ void UartEncodeAndSendMessage(int msgFunction,int msgPayloadLength, unsigned cha
    
 }
 
-
-void UartDecodedMessage(unsigned char c)
-{
-    int static msgDecodedFunction;
-    int static msgDecodedPayloadLength;
-    unsigned char msgDecodedPayload[msgDecodedPayloadLength];
-    int static msgDecodedPayloadIndex = 0;
-    int calculatedCheckSum;
-    int receivedCheckSum;
+int msgDecodedFunction;
+int msgDecodedPayloadLength;
+unsigned char msgDecodedPayload[128];
+int msgDecodedPayloadIndex;
+int calculatedCheckSum;
+int receivedCheckSum;
 
     int static rcvState;
+void UartDecodedMessage(unsigned char c)
+{   
     
     switch (rcvState){
 
@@ -60,6 +60,7 @@ void UartDecodedMessage(unsigned char c)
             rcvState = Function_MSB;
             msgDecodedFunction = 0;
             msgDecodedPayloadLength = 0;
+            msgDecodedPayloadIndex = 0;
         }
         break;
 
@@ -119,28 +120,40 @@ void UartDecodedMessage(unsigned char c)
 //?
 }
 
-void UartProcessDecodedMessage(int function,int payloadLength, unsigned char * payload)
+
+void UartProcessDecodedMessage(int function, int payloadLength, unsigned char * payload)
 {
 //Fonction prenant en entrée un octet et servant à reconstituer les trames
 //?
-    
-    function=attente;
-
-
     switch (function)
     {
-        case attente :
-            function = payloadLength;
-            break;
+    case attente :
+        function = payloadLength;
+        break;
             
     case SET_ROBOT_STATE:
-        
         SetRobotState(payload[0]);
         function = attente;
         break ;
     
     case SET_ROBOT_MANUAL_CONTROL:
         SetRobotAutoControlState(payload[0]);
+        function = attente;
+        break ;
+        
+    case led:
+        if (payload[0] == 0x49 && payload[1] == 0x31)
+            LED_ORANGE = 1;
+        if (payload[0] == 0x4F && payload[1] == 0x31)
+            LED_ORANGE = 0;
+        if (payload[0] == 0x49 && payload[1] == 0x32)
+            LED_BLANCHE = 1;
+        if (payload[0] == 0x4F && payload[1] == 0x32)
+            LED_BLANCHE = 0;
+        if (payload[0] == 0x49 && payload[1] == 0x33)
+            LED_BLEUE = 1;
+        if (payload[0] == 0x4F && payload[1] == 0x33)
+            LED_BLEUE = 0;
         function = attente;
         break ;
         

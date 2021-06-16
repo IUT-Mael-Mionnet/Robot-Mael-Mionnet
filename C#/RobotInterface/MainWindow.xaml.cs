@@ -322,7 +322,7 @@ namespace RobotInterface
 
                 RBTrecept.Text = "";
                 int instant = (( (int)msgPayload[1]) << 24) + (( (int)msgPayload[2]) << 16) + (( (int)msgPayload[3]) << 8) + ( (int)msgPayload[4]);
-                RBTrecept.Text += " \nRobot State : " + ((StateRobot)(msgPayload[0])).ToString() + "−" + instant.ToString() + " ms";
+                RBTrecept.Text += "Robot State : " + ((StateRobot)(msgPayload[0])).ToString() + "−" + instant.ToString() + " ms";
 
 
 //                for (int i = 1; i < msgPayloadLenght; i++)
@@ -331,6 +331,54 @@ namespace RobotInterface
 //                }
                 
             }
+        }
+
+        private void led_orange_Checked(object sender, RoutedEventArgs e)
+        {
+            int ledFunction = 0x0020;
+            byte[] ledPayload = Encoding.ASCII.GetBytes("I1"); 
+            int ledPayloadLenght = ledPayload.Length;
+            UartEncodeAndSendMessage(ledFunction, ledPayloadLenght, ledPayload);
+        }
+
+        private void led_orange_Unchecked(object sender, RoutedEventArgs e)
+        {
+            int ledFunction = 0x0020;
+            byte[] ledPayload = Encoding.ASCII.GetBytes("O1");
+            int ledPayloadLenght = ledPayload.Length;
+            UartEncodeAndSendMessage(ledFunction, ledPayloadLenght, ledPayload);
+        }
+
+        private void led_bleue_Checked(object sender, RoutedEventArgs e)
+        {
+            int ledFunction = 0x0020;
+            byte[] ledPayload = Encoding.ASCII.GetBytes("I2");
+            int ledPayloadLenght = ledPayload.Length;
+            UartEncodeAndSendMessage(ledFunction, ledPayloadLenght, ledPayload);
+        }
+
+        private void led_bleue_Unchecked(object sender, RoutedEventArgs e)
+        {
+            int ledFunction = 0x0020;
+            byte[] ledPayload = Encoding.ASCII.GetBytes("O2");
+            int ledPayloadLenght = ledPayload.Length;
+            UartEncodeAndSendMessage(ledFunction, ledPayloadLenght, ledPayload);
+        }
+
+        private void led_blanche_Checked(object sender, RoutedEventArgs e)
+        {
+            int ledFunction = 0x0020;
+            byte[] ledPayload = Encoding.ASCII.GetBytes("I3");
+            int ledPayloadLenght = ledPayload.Length;
+            UartEncodeAndSendMessage(ledFunction, ledPayloadLenght, ledPayload);
+        }
+
+        private void led_blanche_Unchecked(object sender, RoutedEventArgs e)
+        {
+            int ledFunction = 0x0020;
+            byte[] ledPayload = Encoding.ASCII.GetBytes("O3");
+            int ledPayloadLenght = ledPayload.Length;
+            UartEncodeAndSendMessage(ledFunction, ledPayloadLenght, ledPayload);
         }
     }
 }
