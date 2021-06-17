@@ -27,8 +27,17 @@ int main(void) {
     InitUART();
 
     while (1) {
-   
-        if (ADCIsConversionFinished() == 1  ) //Conversion des données en distance (cm)
+        //mode manuelle
+        if (SetRobotAutoControlState==0)
+        {
+        
+        }
+        
+        
+        
+        // mode automatique  
+        
+        if (ADCIsConversionFinished() == 1 && SetRobotAutoControlState ==1  ) //Conversion des données en distance (cm)
         {
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult();

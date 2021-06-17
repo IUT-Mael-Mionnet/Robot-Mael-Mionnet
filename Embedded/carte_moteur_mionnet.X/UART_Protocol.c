@@ -3,6 +3,7 @@
 #include "UART.h"
 #include "CB_TX1.h"
 #include "IO.h"
+#include "main.h"
 
 unsigned char UartCalculateChecksum(int msgFunction, int msgPayloadLength, unsigned char * msgPayload)
 {
@@ -167,11 +168,11 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char * 
 //*************************************************************************/
 
 void SetRobotState(unsigned char * payload)
-{
-
+{ 
+    return payload;
 }
 
 void SetRobotAutoControlState(unsigned char * payload)
 {
-
+    return payload;
 }
