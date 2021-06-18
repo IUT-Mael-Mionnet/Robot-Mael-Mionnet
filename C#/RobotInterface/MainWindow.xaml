@@ -106,7 +106,11 @@
         </Grid>
 
         <GroupBox Background="#FFCDCFB2" Grid.ColumnSpan="2" x:Name ="RBTReception"  Header="Etat robot" BorderBrush=" #FF000000" Grid.Column="0" Grid.Row="1" ScrollViewer.CanContentScroll="True" Margin="250,5">
+
             <TextBox x:Name="RBTrecept" Background="White" BorderBrush="{x:Null}" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+
         </GroupBox>
+        <Button  Content="manuelle" x:Name="bouttonAutoMan"  Grid.Column="1" Width="100" HorizontalAlignment="Center" Background="#FF2BD8FF" Click="bouttonAutoMan_Click" Margin="280,23,118,10" Grid.Row="1"/>
+
     </Grid>
 </Window>

@@ -14,8 +14,6 @@
 #include "CB_RX1.h"
 #include "UART_Protocol.h"
 
-int subCounter = 0;
-
 int main(void) {
     InitOscillator();
     InitIO();
@@ -27,80 +25,17 @@ int main(void) {
     InitUART();
 
     while (1) {
-        //mode manuelle
-        if (SetRobotAutoControlState==0)
-        {
-        
-        }
-        
-        
-        
-        // mode automatique  
-        
-        if (ADCIsConversionFinished() == 1 && SetRobotAutoControlState ==1  ) //Conversion des données en distance (cm)
-        {
-            ADCClearConversionFinishedFlag();
-            unsigned int * result = ADCGetResult();
-            float volts = ((float) result[1]) * 3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreDroit = 34 / volts - 5;
 
-            volts = ((float) result[2]) * 3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreCentre = 34 / volts - 5;
-
-            volts = ((float) result[4]) * 3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreGauche = 34 / volts - 5;
-
-            volts = ((float) result[3]) * 3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreExtremeGauche = 34 / volts - 5;
-
-            volts = ((float) result[0]) * 3.3 / 4096 * 3.2;
-            robotState.distanceTelemetreExtremeDroit = 34 / volts - 5;
-
-//            if (robotState.distanceTelemetreDroit < 20) // Si obstacle < 30 cm alors LED orange allumé
-//                LED_BLEUE = 1;
-//
-//            //else
-//                //LED_ORANGE = 0; //Sinon LED éteinte
-//
-//            if (robotState.distanceTelemetreCentre < 20) // Si obstacle < 30 cm alors LED bleue allumé
-//                LED_BLEUE = 1;
-//
-//            else
-//                LED_BLEUE = 0; //Sinon LED éteinte
-//
-//            if (robotState.distanceTelemetreGauche < 20) // Si obstacle < 30 cm alors LED blanche allumé
-//                LED_BLANCHE = 1;
-//
-//            else
-//                LED_BLANCHE = 0; //Sinon LED éteinte
-
-//            SendMessage((unsigned char *)"salut", 5);
-//                int i;
-//                for (i = 0; i< CB_RX1_GetDataSize(); i++)
-//                {
-//                    unsigned char c = CB_RX1_Get();
-//                    SendMessage(&c, 1);
-//                }
-            if (subCounter % 10 == 0){
-                unsigned char payload [3];
-                payload [0]= (char) (robotState.distanceTelemetreGauche);
-                payload [1]= (char) (robotState.distanceTelemetreCentre);
-                payload [2]= (char) (robotState.distanceTelemetreDroit);
-                int size = sizeof (payload);
-                UartEncodeAndSendMessage(0x0030, size, payload);
-            }
-            subCounter++;
-//            __delay32(40000);
-            if (CB_RX1_IsDataAvailable()){
                 int i;
-                for (i = 0; i = CB_RX1_GetDataSize(); i++){
+                for (i = 0 ; i < CB_RX1_GetDataSize(); i++ ){
+                    
                     UartDecodedMessage(CB_RX1_Get());
-                }
+                
             }
         }
-        //envoi au télemètre:
-    } 
-}// fin main
+    }
+
+// fin main
 
 unsigned char stateRobot;
 //Attention moteur doit inverser
@@ -322,8 +257,7 @@ void SetNextRobotStateInAutomaticMode() {
 
 
     //Si l?on n?est pas dans la transition de l?étape en cours
-    if (nextStateRobot != stateRobot - 1)
-    {
+    if (nextStateRobot != stateRobot - 1) {
         //On attribue le nouvel état du robot
         stateRobot = nextStateRobot;
         //On envoie à la supervision le nouvel état du robot
@@ -336,4 +270,5 @@ void SetNextRobotStateInAutomaticMode() {
         //int sizeState = sizeof (payload);
         UartEncodeAndSendMessage(0x0050, 5, payload);
     }
-} 
+}
+

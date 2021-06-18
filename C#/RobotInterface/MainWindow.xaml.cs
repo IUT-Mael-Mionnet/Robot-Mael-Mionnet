@@ -100,19 +100,34 @@ namespace RobotInterface
         }
         private void buttonEnvoyer_Click(object sender, RoutedEventArgs e)
         {
+            SendMessage();
+
+        }
+
+        private void bouttonAutoMan_Click(object sender, RoutedEventArgs e)
+        {
             if (a == 1)
             {
-                buttonEnvoyer.Background = Brushes.RoyalBlue;
+                bouttonAutoMan.Content = "manuelle";
+
+                int msgFunction = 0X0052;
+                int msgPayloadLength = 1;
+                byte [] msgPayload = {1};
+                UartEncodeAndSendMessage(msgFunction,msgPayloadLength,msgPayload);
                 a = 0;
+
             }
             else
             {
-                buttonEnvoyer.Background = Brushes.Beige;
+                bouttonAutoMan.Content = "automatique";
+                int msgFunction = 0X0052;
+                int msgPayloadLength = 1;
+                byte [] msgPayload  = {0} ;
+                UartEncodeAndSendMessage(msgFunction, msgPayloadLength, msgPayload);
                 a = 1;
             }
 
-            SendMessage();
-
+            
         }
 
         private void textBoxEmission_KeyUp(object sender, KeyEventArgs e)

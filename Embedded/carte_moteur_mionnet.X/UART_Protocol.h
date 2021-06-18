@@ -20,12 +20,22 @@
 
 void UartEncodeAndSendMessage();
 unsigned char UartCalculateChecksum();
-void UartDecodeMessage();
-void UartProcessDecodedMessage();
+void UartDecodeMessage(unsigned char c);
+void UartProcessDecodedMessage(int function, int payloadLength, unsigned char * payload);
 void SetRobotState();
 void SetRobotAutoControlState();
 
+void manuelle (void);
+void automatique (void);
 
+void OperatingSystemLoop(void);
+void SetNextRobotStateInAutomaticMode();
+int main (void);
+
+typedef enum {
+    FALSE = 0,
+    TRUE = 1,
+} boolean;
 
 #endif	/* UART_PROTOCOL_H */
 
