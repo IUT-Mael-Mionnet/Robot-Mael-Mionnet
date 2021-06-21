@@ -13,6 +13,7 @@
 #include "CB_TX1.h"
 #include "CB_RX1.h"
 #include "UART_Protocol.h"
+#include "automatique.h"
 
 int main(void) {
     InitOscillator();
@@ -23,15 +24,19 @@ int main(void) {
     InitADC1();
     InitTimer4();
     InitUART();
+    automatique();
 
     while (1) {
+        
+        
 
                 int i;
                 for (i = 0 ; i < CB_RX1_GetDataSize(); i++ ){
                     
-                    UartDecodedMessage(CB_RX1_Get());
-                
-            }
+                     UartDecodedMessage(CB_RX1_Get());
+                    LED_BLANCHE = ! LED_BLANCHE;
+                }
+            
         }
     }
 

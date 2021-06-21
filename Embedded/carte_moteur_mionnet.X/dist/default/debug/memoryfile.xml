@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/default/production/carte_moteur_mionnet.X.production.elf">
+  <executable name="dist/default/debug/carte_moteur_mionnet.X.debug.elf">
     <memory name="data">
       <units>bytes</units>
       <length>49152</length>
-      <used>470</used>
-      <free>48682</free>
+      <used>550</used>
+      <free>48602</free>
     </memory>
     <memory name="program">
       <units>bytes</units>
       <length>524514</length>
-      <used>9702</used>
-      <free>514812</free>
+      <used>9390</used>
+      <free>515124</free>
     </memory>
   </executable>
 </project>

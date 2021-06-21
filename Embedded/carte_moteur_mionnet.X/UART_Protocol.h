@@ -25,7 +25,7 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char * 
 void SetRobotState();
 void SetRobotAutoControlState();
 
-void manuelle (void);
+void manuelle (int function, int payloadLength, unsigned char * payload);
 void automatique (void);
 
 void OperatingSystemLoop(void);
