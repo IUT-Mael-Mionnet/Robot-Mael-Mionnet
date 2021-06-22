@@ -29,12 +29,12 @@ int main(void) {
     while (1) {
         
         
-
+        //automatique();
                 int i;
                 for (i = 0 ; i < CB_RX1_GetDataSize(); i++ ){
                     
                      UartDecodedMessage(CB_RX1_Get());
-                    LED_BLANCHE = ! LED_BLANCHE;
+                      LED_BLANCHE = ! LED_BLANCHE;
                 }
             
         }

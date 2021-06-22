@@ -9,12 +9,13 @@
             <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/ADC.c</file>
             <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/main.c</file>
             <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/automatique.c</file>
-            <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/manuelle.h</file>
-            <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/timer.c</file>
             <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/CB_RX1.c</file>
             <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/UART_Protocol.h</file>
+            <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/manuelle.h</file>
+            <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/timer.c</file>
             <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/ADC.h</file>
             <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/manuelle.c</file>
+            <file>file:/C:/GitHub/Robot-Mael-Mionnet/Embedded/carte_moteur_mionnet.X/ChipConfig.c</file>
         </group>
     </open-files>
 </project-private>

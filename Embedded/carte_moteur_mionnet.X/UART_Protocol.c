@@ -67,10 +67,11 @@ void UartDecodedMessage(unsigned char c) {
 
         case Waiting:
             if (c == 0xFE) {
-                rcvState = Function_MSB;
+                
                 msgDecodedFunction = 0;
                 msgDecodedPayloadLength = 0;
                 msgDecodedPayloadIndex = 0;
+                rcvState = Function_MSB;
             }
             break;
 
@@ -158,10 +159,15 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char * 
             break;
 
         case SET_ROBOT_MANUAL_CONTROL:
-            if (payload == 0) {
-                void automatique();
+            
+            if (payload[0] == 0x01) {
+                LED_ORANGE = 0;
+                
+                manuelle(function, payloadLength, payload);
             } else {
-                void manuelle(int function, int payloadLength, unsigned char * payload);
+                
+                automatique();
+                LED_ORANGE = 1;
                 
             }
 

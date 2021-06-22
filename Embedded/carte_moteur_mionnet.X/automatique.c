@@ -17,6 +17,7 @@
 int subCounter = 0;
 
 void automatique() {
+    LED_ORANGE=0;
     if (ADCIsConversionFinished() == 1) //Conversion des données en distance (cm)
     {
         ADCClearConversionFinishedFlag();

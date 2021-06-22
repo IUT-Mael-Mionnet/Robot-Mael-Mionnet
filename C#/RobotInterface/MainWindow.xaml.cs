@@ -122,7 +122,7 @@ namespace RobotInterface
                 bouttonAutoMan.Content = "automatique";
                 int msgFunction = 0X0052;
                 int msgPayloadLength = 1;
-                byte [] msgPayload  = {1} ;
+                byte [] msgPayload  = {0} ;
                 UartEncodeAndSendMessage(msgFunction, msgPayloadLength, msgPayload);
                 a = 1;
             }
