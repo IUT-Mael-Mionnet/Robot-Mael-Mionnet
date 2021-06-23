@@ -15,6 +15,8 @@
 #include "UART_Protocol.h"
 #include "automatique.h"
 
+
+
 int main(void) {
     InitOscillator();
     InitIO();
@@ -30,12 +32,26 @@ int main(void) {
         
         
         //automatique();
-                int i;
-                for (i = 0 ; i < CB_RX1_GetDataSize(); i++ ){
-                    
-                     UartDecodedMessage(CB_RX1_Get());
-                      LED_BLANCHE = ! LED_BLANCHE;
-                }
+
+        int i;
+        for (i = 0 ; i < CB_RX1_GetDataSize(); i++ ){
+
+             UartDecodedMessage(CB_RX1_Get());
+             LED_BLEUE=!LED_BLEUE;
+
+        }
+        if (robotState.isAutoControl == TRUE){
+            int manfunction = robotState.isfunction;
+            int manpayloadlength = robotState.ispayloadLength;
+            unsigned char* manpayload = robotState.ispayload;
+           
+ //           manuelle(manfunction,manpayloadlength,manpayload);
+        }
+        else{
+           
+//            automatique();
+        }
+
             
         }
     }

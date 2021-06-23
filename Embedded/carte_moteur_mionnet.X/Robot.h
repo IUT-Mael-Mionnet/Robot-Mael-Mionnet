@@ -1,5 +1,12 @@
 #ifndef ROBOT_H
 #define ROBOT_H
+
+typedef enum {
+    FALSE = 0,
+    TRUE = 1,
+} boolean;
+extern volatile boolean mybool;
+
 typedef struct robotStateBITS {
     union {
 
@@ -16,6 +23,12 @@ typedef struct robotStateBITS {
             float distanceTelemetreCentre;
             float distanceTelemetreGauche;
             float distanceTelemetreExtremeGauche;
+            
+            boolean isAutoControl;
+            float isfunction;
+            float ispayloadLength;
+            unsigned char* ispayload;
+            
         }
     ;}
 ;} 

@@ -37,23 +37,23 @@ void automatique() {
         volts = ((float) result[0]) * 3.3 / 4096 * 3.2;
         robotState.distanceTelemetreExtremeDroit = 34 / volts - 5;
 
-        if (robotState.distanceTelemetreDroit < 20) // Si obstacle < 30 cm alors LED orange allumé
-            LED_ORANGE = 1;
-
-        else
-            LED_ORANGE = 0; //Sinon LED éteinte
-
-        if (robotState.distanceTelemetreCentre < 20) // Si obstacle < 30 cm alors LED bleue allumé
-            LED_BLEUE = 1;
-
-        else
-            LED_BLEUE = 0; //Sinon LED éteinte
-
-        if (robotState.distanceTelemetreGauche < 20) // Si obstacle < 30 cm alors LED blanche allumé
-            LED_BLANCHE = 1;
-
-        else
-            LED_BLANCHE = 0; //Sinon LED éteinte
+//        if (robotState.distanceTelemetreDroit < 20) // Si obstacle < 30 cm alors LED orange allumé
+//            LED_ORANGE = 1;
+//
+//        else
+//            LED_ORANGE = 0; //Sinon LED éteinte
+//
+//        if (robotState.distanceTelemetreCentre < 20) // Si obstacle < 30 cm alors LED bleue allumé
+//            LED_BLEUE = 1;
+//
+//        else
+//            LED_BLEUE = 0; //Sinon LED éteinte
+//
+//        if (robotState.distanceTelemetreGauche < 20) // Si obstacle < 30 cm alors LED blanche allumé
+//            LED_BLANCHE = 1;
+//
+//        else
+//            LED_BLANCHE = 0; //Sinon LED éteinte
 
         SendMessage((unsigned char *) "salut", 5);
         int i;
@@ -71,12 +71,6 @@ void automatique() {
         }
         subCounter++;
         __delay32(40000);
-        if (CB_RX1_IsDataAvailable()) {
-            int i;
-            for (i = 0; i < CB_RX1_GetDataSize(); i++) {
 
-                UartDecodedMessage(CB_RX1_Get());
-            }
-        }
     }
 }

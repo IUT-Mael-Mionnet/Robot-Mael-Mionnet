@@ -32,10 +32,6 @@ void OperatingSystemLoop(void);
 void SetNextRobotStateInAutomaticMode();
 int main (void);
 
-typedef enum {
-    FALSE = 0,
-    TRUE = 1,
-} boolean;
 
 #endif	/* UART_PROTOCOL_H */
 

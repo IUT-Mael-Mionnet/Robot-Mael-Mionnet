@@ -14,11 +14,10 @@
 #include "CB_RX1.h"
 #include "automatique.h"
 
-boolean isAutomatique = TRUE;
-
-
+unsigned char boucle;
 
 unsigned char UartCalculateChecksum(int msgFunction, int msgPayloadLength, unsigned char * msgPayload) {
+    
     //Fonction prenant entrée la trame et sa longueur pour calculer le checksum
     unsigned char checksum;
     checksum = 0xFE;
@@ -34,6 +33,7 @@ unsigned char UartCalculateChecksum(int msgFunction, int msgPayloadLength, unsig
 }
 
 void UartEncodeAndSendMessage(int msgFunction, int msgPayloadLength, unsigned char* msgPayload) {
+    
     unsigned char checksum;
     unsigned char msg[6 + msgPayloadLength];
     int pos = 0;
@@ -62,10 +62,12 @@ int receivedCheckSum;
 int static rcvState;
 
 void UartDecodedMessage(unsigned char c) {
+    
 
     switch (rcvState) {
 
         case Waiting:
+            
             if (c == 0xFE) {
                 
                 msgDecodedFunction = 0;
@@ -76,6 +78,7 @@ void UartDecodedMessage(unsigned char c) {
             break;
 
         case Function_MSB:
+            
             msgDecodedFunction = c;
             msgDecodedFunction = msgDecodedFunction << 8;
             rcvState = Function_LSB;
@@ -114,6 +117,7 @@ void UartDecodedMessage(unsigned char c) {
             calculatedCheckSum = UartCalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
             if (calculatedCheckSum == receivedCheckSum) {
                 UartProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+                
             }
             rcvState = Waiting;
             break;
@@ -139,18 +143,33 @@ void SetRobotState(unsigned char * payload) {
 }
 
 void SetRobotAutoControlState(unsigned char * payload) {
+    boucle = payload[0];
+    robotState.isAutoControl = boucle;
+    if (robotState.isAutoControl == 0x01) {
+        robotState.isAutoControl = TRUE;
+//         LED_ORANGE=0;
+//            LED_BLANCHE=1;
+        
 
+    }
+    else {
+        robotState.isAutoControl = FALSE;
+//        LED_ORANGE=1;
+//        LED_BLANCHE=0;
+        
+    }
 }
-
-
-
 
 void UartProcessDecodedMessage(int function, int payloadLength, unsigned char * payload) {
     //Fonction prenant en entrée un octet et servant à reconstituer les trames
-
+    robotState.isfunction = function;
+    robotState.ispayloadLength = payloadLength ;
+    robotState.ispayload = payload;
+    
     switch (function) {
         case attente:
-            function = payloadLength;
+            //function = payloadLength;
+            
             break;
 
         case SET_ROBOT_STATE:
@@ -159,19 +178,12 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char * 
             break;
 
         case SET_ROBOT_MANUAL_CONTROL:
-            
-            if (payload[0] == 0x01) {
-                LED_ORANGE = 0;
-                
-                manuelle(function, payloadLength, payload);
-            } else {
-                
-                automatique();
-                LED_ORANGE = 1;
-                
-            }
 
+            SetRobotAutoControlState(payload);
             function = attente;
+            
+            
+
             break;
 
             //            case led:
