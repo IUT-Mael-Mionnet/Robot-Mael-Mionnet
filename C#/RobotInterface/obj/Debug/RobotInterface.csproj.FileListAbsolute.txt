@@ -33,3 +33,4 @@ D:\IUT\Robot\Github\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterfac
 D:\IUT\Robot\Github\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterface.csproj.CopyComplete
 D:\IUT\Robot\Github\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterface.exe
 D:\IUT\Robot\Github\Robot-Mael-Mionnet\C#\RobotInterface\obj\Debug\RobotInterface.pdb
+C:\GitHub\Robot-Mael-Mionnet\C#\RobotInterface\bin\Debug\MouseKeyboardActivityMonitor.dll

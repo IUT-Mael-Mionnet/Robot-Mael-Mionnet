@@ -52,7 +52,6 @@ int main(void) {
            //LED_ORANGE=0;
             automatique();
         }
-
             
         }
     }

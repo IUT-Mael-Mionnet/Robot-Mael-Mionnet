@@ -172,10 +172,10 @@ void UartProcessDecodedMessage(int function, int payloadLength, unsigned char * 
             
             break;
 
-        case SET_ROBOT_STATE:
-
-
-            break;
+//        case SET_ROBOT_STATE:
+//
+//
+//            break;
 
         case SET_ROBOT_MANUAL_CONTROL:
 

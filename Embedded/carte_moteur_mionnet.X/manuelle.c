@@ -31,7 +31,28 @@ void commande_manuelle(int function, int payloadLength, unsigned char * payload)
             function = payloadLength;
             break;
 
-
+        case SET_ROBOT_STATE:
+            if (payload[0]==0x08)
+            {
+            PWMSetSpeedConsigne(-20, MOTEUR_DROIT);
+            PWMSetSpeedConsigne(-20, MOTEUR_GAUCHE);   
+            }
+            
+            if (payload[0]==0x0A)
+            {
+               PWMSetSpeedConsigne(20, MOTEUR_DROIT);
+               PWMSetSpeedConsigne(20, MOTEUR_GAUCHE);  
+            }
+            if (payload[0]==0x02)
+            {
+               PWMSetSpeedConsigne(-20, MOTEUR_DROIT);
+               PWMSetSpeedConsigne(20, MOTEUR_GAUCHE);   
+            }
+            if (payload[0]==0x00)
+            {
+               PWMSetSpeedConsigne(0, MOTEUR_DROIT);
+               PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);   
+            }
 
             break;
 

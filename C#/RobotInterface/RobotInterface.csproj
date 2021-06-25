@@ -39,8 +39,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ExtendedSerialPort\ExtendedSerialPort\bin\Debug\ExtendedSerialPort.dll</HintPath>
     </Reference>
+    <Reference Include="MouseKeyboardActivityMonitor">
+      <HintPath>..\MouseKeyboardActivityMonitor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />

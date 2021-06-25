@@ -9,12 +9,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
+//using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Windows.Forms;
+using MouseKeyboardActivityMonitor.WinApi;
+using MouseKeyboardActivityMonitor;
 
 namespace RobotInterface
 {
@@ -27,6 +30,7 @@ namespace RobotInterface
         ReliableSerialPort serialPort1;
         AsyncCallback SerialPort1_DataReceived;
         DispatcherTimer timerAffichage;
+        private readonly KeyboardHookListener m_KeyboardHookManager;
 
         Robot robot = new Robot();
         
@@ -41,9 +45,16 @@ namespace RobotInterface
             timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timerAffichage.Tick += TimerAffichage_Tick;
             timerAffichage.Start();
+
+            m_KeyboardHookManager = new KeyboardHookListener(new GlobalHooker());
+            m_KeyboardHookManager.Enabled = true;
+            m_KeyboardHookManager.KeyDown += HookManager_KeyDown;
             
+
             robot.receivedText = "";
         }
+
+        
 
         private void SerialPort1_DataReceived1(object sender, DataReceivedArgs e)
         {
@@ -93,7 +104,7 @@ namespace RobotInterface
             serialPort1.Write(msg, 0, msg.Length);
         }
 
-        int a = 0;
+        int a = 1;
 
         public object SerialPort1 { get; private set; }
 
@@ -134,15 +145,34 @@ namespace RobotInterface
             
         }
 
-        private void textBoxEmission_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
+        private void HookManager_KeyDown(object sender, KeyEventArgs e) {
+ //            if (a == 0) { 
+            switch (e.KeyCode)
             {
-                SendMessage();
+                case Keys.Left:
+                    UartEncodeAndSendMessage(0x0051, 1, new byte[] {(byte)StateRobot.STATE_TOURNE_SUR_PLACE_GAUCHE});
+                    break;
+
+                case Keys.Right:
+                 
+                    UartEncodeAndSendMessage(0x0051, 1, new byte[] { (byte)StateRobot.STATE_TOURNE_SUR_PLACE_DROITE});
+                    break;
+                case Keys.Up:
+                    UartEncodeAndSendMessage(0x0051, 1, new byte[] { (byte)StateRobot.STATE_AVANCE });
+                    break;
+                case Keys.Down:
+                    UartEncodeAndSendMessage(0x0051, 1, new byte[] { (byte)StateRobot.STATE_ARRET });
+                    break;
+                case Keys.PageDown:
+                    UartEncodeAndSendMessage(0x0051, 1, new byte[] { (byte)StateRobot.STATE_RECULE });
+                    break;
             }
-        }
-        
-        private void TimerAffichage_Tick(object sender, EventArgs e)
+            }
+//        }
+ 
+
+
+    private void TimerAffichage_Tick(object sender, EventArgs e)
         {
             if (robot.receivedText != "")
             {

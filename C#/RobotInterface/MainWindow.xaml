@@ -18,7 +18,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <GroupBox x:Name ="groupBox" Header ="Emission" Background="#FFABABAC" BorderBrush="#FF000000" Grid.Column="0" Grid.Row="0" Margin="5">
-            <TextBox x:Name="textBoxEmission" Background="{x:Null}" BorderBrush="{x:Null}" KeyUp="textBoxEmission_KeyUp"  />
+            <TextBox x:Name="textBoxEmission" Background="{x:Null}" BorderBrush="{x:Null}"   />
         </GroupBox>
 
         <GroupBox x:Name ="groupBox1"  Header="Réception" Background="#FF939393" BorderBrush=" #FF000000" Grid.Column="1" Grid.Row="0" Margin="5" >
