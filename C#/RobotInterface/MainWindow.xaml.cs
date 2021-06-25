@@ -85,6 +85,10 @@ namespace RobotInterface
             {
                 msg[pos++] = msgPayload[i];
             }
+            for(int i = 0; i< msg.Length; i++)
+            {
+                textBoxReception.Text += msg[i];
+            }
             msg[pos++] = checksum;
             serialPort1.Write(msg, 0, msg.Length);
         }

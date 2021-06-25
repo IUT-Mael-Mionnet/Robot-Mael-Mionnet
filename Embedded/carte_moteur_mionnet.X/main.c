@@ -37,19 +37,20 @@ int main(void) {
         for (i = 0 ; i < CB_RX1_GetDataSize(); i++ ){
 
              UartDecodedMessage(CB_RX1_Get());
-             LED_BLEUE=!LED_BLEUE;
+             //LED_BLEUE=!LED_BLEUE;
 
         }
         if (robotState.isAutoControl == TRUE){
             int manfunction = robotState.isfunction;
             int manpayloadlength = robotState.ispayloadLength;
             unsigned char* manpayload = robotState.ispayload;
+            //LED_ORANGE=1;
            
- //           manuelle(manfunction,manpayloadlength,manpayload);
+            manuelle(manfunction,manpayloadlength,manpayload);
         }
         else{
-           
-//            automatique();
+           //LED_ORANGE=0;
+            automatique();
         }
 
             

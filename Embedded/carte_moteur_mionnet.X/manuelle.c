@@ -19,11 +19,7 @@ void manuelle(int function, int payloadLength, unsigned char * payload) {
     PWMSetSpeedConsigne(0, MOTEUR_DROIT);
     PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
     commande_manuelle(function, payloadLength, payload);
-   
 
-    
-
-    LED_ORANGE = 1;
 
 }
 
