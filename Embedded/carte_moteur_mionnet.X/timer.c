@@ -70,6 +70,7 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     //LED_BLEUE = !LED_BLEUE;
     PWMUpdateSpeed();
     ADC1StartConversionSequence();
+    QEIUpdateData ();
 }
 
 void SetFreqTimer1(float freq)

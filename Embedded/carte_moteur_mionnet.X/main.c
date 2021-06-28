@@ -14,6 +14,7 @@
 #include "CB_RX1.h"
 #include "UART_Protocol.h"
 #include "automatique.h"
+#include "QEI.h"
 
 
 
@@ -27,6 +28,8 @@ int main(void) {
     InitTimer4();
     InitUART();
     automatique();
+    InitQEI1();
+    InitQEI2 ();
 
     while (1) {
         
